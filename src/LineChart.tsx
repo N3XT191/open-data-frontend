@@ -1,5 +1,5 @@
 import { Answer } from "./Interfaces";
-import { VictoryChart, VictoryLine } from "victory";
+import { VictoryChart, VictoryLabel, VictoryLine } from "victory";
 
 interface Props {
 	chart: Answer;
@@ -19,6 +19,11 @@ const LineChart: React.FC<Props> = ({ chart }) => {
 
 	return (
 		<VictoryChart height={300} scale={{ x: "time" }}>
+			<VictoryLabel
+				text={chart.graph_title}
+				textAnchor="middle"
+				style={{ fill: "#aaa", fontSize: 10 }}
+			/>
 			<VictoryLine
 				interpolation={"linear"}
 				data={data}

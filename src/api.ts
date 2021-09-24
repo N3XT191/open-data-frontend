@@ -39,9 +39,21 @@ export const getQuestions = async () => await getData("/questions");
 
 const chartSettings = [
 	{},
-	{ chart_type: "line", x_axis_type: true },
-	{ chart_type: "line", x_axis_type: true },
-	{ chart_type: "pie", x_axis_type: true },
+	{
+		chart_type: "line",
+		x_axis_type: true,
+		graph_label: "CO2 in [Unit] over time",
+	},
+	{
+		chart_type: "line",
+		x_axis_type: true,
+		graph_label: "Ozone in [Unit] over time",
+	},
+	{
+		chart_type: "pie",
+		x_axis_type: true,
+		graph_label: "Air pollution [normalized] over time",
+	},
 ];
 export const askQuestion = async (question_id: number) => {
 	return {
