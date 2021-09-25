@@ -131,11 +131,17 @@ for (let i = 58; i <= 59; i++) {
     x_axis_time: true,
   });
 }
-for (let i = 59; i <= 61; i++) {
+for (let i = 59; i <= 59; i++) {
   chartSettings.push({
     id: i,
     chart_type: "line",
     x_axis_time: true,
+  });
+}
+for (let i = 60; i <= 61; i++) {
+  chartSettings.push({
+    id: i,
+    chart_type: "line",
   });
 }
 for (let i = 62; i <= 62; i++) {
