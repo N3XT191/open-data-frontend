@@ -1,6 +1,8 @@
 import { css } from "@emotion/css";
+import { SSL_OP_ALLOW_UNSAFE_LEGACY_RENEGOTIATION } from "constants";
 import Fuse from "fuse.js";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect } from "react";
+import { useMemo, useState } from "react";
 import { Question } from "./Interfaces";
 
 const fuseOptions = {
@@ -43,10 +45,11 @@ const styles = {
     width: 100%;
     padding: 5px 20px;
     box-sizing: border-box;
+    background: #eeeeee;
   `,
   activeSuggestion: css`
-    background: #743fca;
     color: white;
+    background: #743fca !important;
   `,
   enterHint: css`
     display: flex;
