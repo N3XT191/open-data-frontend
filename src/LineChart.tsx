@@ -9,6 +9,7 @@ import {
   chartTopPaddingNoTitle,
   chartBottomPaddingNoAxis,
 } from "./victory-theme";
+import { last } from "lodash";
 
 interface Props {
   chart: Answer;
@@ -30,7 +31,17 @@ const LineChart: React.FC<Props> = ({ chart, width, height }) => {
     }
   }, [chart]);
 
-  const yLabelWidth = useMemo(() => getLabelWidth(data, "y"), [data]);
+  const yLabelWidth = useMemo(
+    () =>
+      getLabelWidth(
+        [
+          { y: Math.round(chart.data[0].y) },
+          { y: Math.round(last<any>(chart.data).y) },
+        ],
+        "x"
+      ),
+    [chart.data]
+  );
 
   return (
     <CenteredLayout>
@@ -41,7 +52,7 @@ const LineChart: React.FC<Props> = ({ chart, width, height }) => {
           scale={{ x: chart.x_axis_time ? "time" : undefined }}
           padding={{
             ...defaultChartPadding,
-            left: yLabelWidth ? yLabelWidth + 20 : defaultChartPadding.left,
+            left: yLabelWidth ? yLabelWidth : defaultChartPadding.left,
             top: chart.graph_label?.trim().length
               ? defaultChartPadding.top
               : chartTopPaddingNoTitle,
@@ -51,7 +62,7 @@ const LineChart: React.FC<Props> = ({ chart, width, height }) => {
           }}
         >
           <VictoryLabel
-            x={225}
+            x={width / 2}
             y={25}
             textAnchor="middle"
             text={chart.graph_label}
