@@ -12,36 +12,35 @@ import { useMemo } from "react";
 
 interface Props {
   chart: Answer;
+  width: number;
+  height: number;
 }
 
-function isEvery<A, B extends A>(data: A[], cb: (v: A) => v is B): data is B[] {
-  return data.every((e) => cb(e));
-}
+const tickFormat = (v: unknown) => {
+  if (typeof v === "number") {
+    return "" + v;
+  }
+  return "" + v;
+};
 
 function getYLabelWidth(chartData: unknown[]): number | undefined {
-  function isMeasurable(entry: unknown): entry is { x: string } {
-    return (
-      !!entry &&
-      typeof entry === "object" &&
-      typeof (entry as any).x === "string"
-    );
-  }
-
-  if (!chartData.length || !isEvery(chartData, isMeasurable)) {
+  const labels = chartData.map((e) => tickFormat((e as any).x));
+  if (!chartData.length) {
     return undefined;
   }
-
   return Math.max(
-    ...chartData.map((e) => textMeasurementCaches.plotLabel.measure(e.x).width)
+    ...labels.map((l) => textMeasurementCaches.plotLabel.measure(l).width)
   );
 }
 
-const BarChart: React.FC<Props> = ({ chart }) => {
+const BarChart: React.FC<Props> = ({ chart, width, height }) => {
   const yLabelWidth = useMemo(() => getYLabelWidth(chart.data), [chart.data]);
   return (
     <CenteredLayout>
       <ChartCard>
         <VictoryChart
+          width={width}
+          height={height}
           domainPadding={25}
           theme={customTheme}
           padding={{
@@ -53,7 +52,7 @@ const BarChart: React.FC<Props> = ({ chart }) => {
           }}
         >
           <VictoryLabel
-            x={225}
+            x={width / 2}
             y={25}
             textAnchor="middle"
             text={chart.graph_label}
@@ -67,7 +66,7 @@ const BarChart: React.FC<Props> = ({ chart }) => {
             categories={{ x: chart.data.map((v: any) => v.x) }}
             horizontal={true}
           ></VictoryBar>
-          <VictoryAxis />
+          <VictoryAxis tickFormat={tickFormat} />
           <VictoryAxis dependentAxis={true} />
         </VictoryChart>
       </ChartCard>

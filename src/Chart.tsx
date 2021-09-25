@@ -19,7 +19,7 @@ const Chart: React.FC<Props> = ({ chart }) => {
   } else if (chart.chart_type === "pie") {
     return <PieChart chart={chart} />;
   } else if (chart.chart_type === "bar") {
-    return <BarChart chart={chart} />;
+    return <BarChart chart={chart} width={500} height={400} />;
   } else if (chart.chart_type === "table") {
     return <TableChart chart={chart} />;
   } else if (chart.chart_type === "map") {
