@@ -8,8 +8,8 @@ import {
   customTheme,
   defaultChartPadding,
 } from "./victory-theme";
-import { textMeasurementCaches } from "./text-measurement";
 import { useMemo } from "react";
+import { tickFormat, getLabelWidth } from "./measured-ticks";
 
 interface Props {
   chart: Answer;
@@ -17,25 +17,10 @@ interface Props {
   height: number;
 }
 
-const tickFormat = (v: unknown) => {
-  if (typeof v === "number") {
-    return "" + v;
-  }
-  return "" + v;
-};
-
-function getYLabelWidth(chartData: unknown[]): number | undefined {
-  const labels = chartData.map((e) => tickFormat((e as any).x));
-  if (!chartData.length) {
-    return undefined;
-  }
-  return Math.max(
-    ...labels.map((l) => textMeasurementCaches.plotLabel.measure(l).width)
-  );
-}
-
 const BarChart: React.FC<Props> = ({ chart, width, height }) => {
-  const yLabelWidth = useMemo(() => getYLabelWidth(chart.data), [chart.data]);
+  const yLabelWidth = useMemo(() => getLabelWidth(chart.data, "x"), [
+    chart.data,
+  ]);
   return (
     <CenteredLayout>
       <ChartCard>

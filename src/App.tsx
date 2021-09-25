@@ -23,14 +23,14 @@ function App() {
 
   useEffect(() => {
     const onKeyDown = (ev: KeyboardEvent) => {
-      if (ev.key === "r" && ev.ctrlKey) {
+      if (ev.key === "r" && (ev.altKey || ev.metaKey)) {
         ev.preventDefault();
         ev.stopPropagation();
 
         setSelectedQuestion(
           shuffle(
             chartSettings.filter(
-              (s) => s.id !== selectedQuestion && s.chart_type === "bar"
+              (s) => s.id !== selectedQuestion && s.chart_type === "line"
             )
           )[0]?.id
         );
