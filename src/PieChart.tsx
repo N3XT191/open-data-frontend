@@ -17,7 +17,7 @@ const PieChart: React.FC<Props> = ({ chart, width, height }) => {
 					height={height}
 					colorScale="qualitative"
 					data={chart.data}
-					labelRadius={width / 3.5}
+					labelRadius={Math.min(width, height) / 3.5}
 					style={{ labels: { fill: "white", fontSize: 35 } }}
 				></VictoryPie>
 			</ChartCard>

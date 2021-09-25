@@ -37,13 +37,13 @@ export const chartSettings: Omit<Answer, "data">[] = [
 		id: 1,
 		chart_type: "line",
 		x_axis_time: true,
-		graph_label: "CO2 in [Unit] over time",
+		graph_label: "CO in [mg/m3] over time",
 	},
 	{
 		id: 2,
 		chart_type: "line",
 		x_axis_time: true,
-		graph_label: "Ozone in [Unit] over time",
+		graph_label: "Ozone in [µg/m3] over time",
 	},
 	{
 		id: 3,
@@ -67,13 +67,13 @@ export const chartSettings: Omit<Answer, "data">[] = [
 		id: 6,
 		chart_type: "line",
 		x_axis_time: true,
-		graph_label: "Nitrogen Monoxide in [Unit] over time",
+		graph_label: "Nitrogen Monoxide in [µg/m3] over time",
 	},
 	{
 		id: 7,
 		chart_type: "line",
 		x_axis_time: true,
-		graph_label: "Nitrogen Dioxide in [Unit] over time",
+		graph_label: "Nitrogen Dioxide in [µg/m3] over time",
 	},
 	{
 		id: 8,
@@ -85,19 +85,19 @@ export const chartSettings: Omit<Answer, "data">[] = [
 		id: 9,
 		chart_type: "line",
 		x_axis_time: true,
-		graph_label: "Particulate Matter in [Unit] over time",
+		graph_label: "Particulate Matter in [µg/m3] over time",
 	},
 	{
 		id: 10,
 		chart_type: "line",
 		x_axis_time: true,
-		graph_label: "PM2.5 in [Unit] over time",
+		graph_label: "PM2.5 in [µg/m3] over time",
 	},
 	{
 		id: 11,
 		chart_type: "line",
 		x_axis_time: true,
-		graph_label: "Sulphur Dioxide in [Unit] over time",
+		graph_label: "Sulphur Dioxide in [µg/m3] over time",
 	},
 	{
 		id: 12,
@@ -136,20 +136,26 @@ for (let i = 59; i <= 59; i++) {
 		id: i,
 		chart_type: "line",
 		x_axis_time: true,
+		graph_label: "Power [kW] consumption (weekly average)",
 	});
 }
-for (let i = 60; i <= 61; i++) {
-	chartSettings.push({
-		id: i,
-		chart_type: "line",
-	});
-}
-for (let i = 62; i <= 62; i++) {
-	chartSettings.push({
-		id: i,
-		chart_type: "line",
-	});
-}
+chartSettings.push({
+	id: 60,
+	chart_type: "line",
+	graph_label: "Power [kW] consumption (hourly average) over a day",
+	x_axis_hours: true,
+});
+chartSettings.push({
+	id: 61,
+	chart_type: "line",
+	graph_label: "Power [kW] consumption (daily average) over a week",
+});
+
+chartSettings.push({
+	id: 62,
+	chart_type: "line",
+	graph_label: "Power [kW] consumption (daily average)",
+});
 for (let i = 63; i <= 68; i++) {
 	chartSettings.push({
 		id: i,

@@ -16,7 +16,7 @@ const Chart: React.FC<Props> = ({ chart, windowSize }) => {
 	const maxWidth = 800;
 	const minWidth = 300;
 	const width = windowSize.width
-		? Math.min(Math.max(windowSize.width - 400, minWidth), maxWidth)
+		? Math.min(Math.max(windowSize.width - 200, minWidth), maxWidth)
 		: minWidth;
 
 	const maxHeight = 800;

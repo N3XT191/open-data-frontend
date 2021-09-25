@@ -57,9 +57,11 @@ const TableChart: React.FC<Props> = ({ chart, width, height }) => {
 						display: "flex",
 						justifyContent: "center",
 						alignItems: "center",
-						fontSize: 25,
+						fontSize: 24,
+						flexDirection: "column",
 					}}
 				>
+					<div style={{ fontSize: 27, padding: 25 }}>{chart.graph_label}</div>
 					<table style={{ borderCollapse: "collapse" }}>
 						<thead style={{ backgroundColor: "#743fca", color: "white" }}>
 							<td style={tdStyle}>Pollutant</td>
