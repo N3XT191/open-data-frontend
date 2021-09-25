@@ -63,6 +63,7 @@ interface SearchResult {
 const QuestionSelector: React.FC<Props> = ({ questions, onSelect }) => {
 	const [searchValue, setSearchValue] = useState("");
 	const [selectedIndex, setSelectedIndex] = useState(0);
+	const [listOffset, setListOffset] = useState(0);
 	const [searchResults, setSearchResults] = useState<SearchResult[]>();
 
 	const hasSearchValue = !!searchValue.trim();
@@ -87,23 +88,28 @@ const QuestionSelector: React.FC<Props> = ({ questions, onSelect }) => {
 		};
 	}, [hasSearchValue, searchValue]);
 
-	const suggestions = useMemo(() => {
+	const allSuggestions = useMemo(() => {
 		if (!hasSearchValue) {
-			// TODO random suggested questions go here
-			return [];
+			return questions;
 		}
 		if (hasSearchValue && !searchResults) {
 			return [];
 		}
 		return (searchResults || [])
-			.map((r) => ({ r, q: questions.find((q) => q.id === r.id) }))
-			.filter(({ r, q }) => q)
-			.map(({ r, q }) => ({ rank: r, item: q! }));
+			.map((r) => questions.find((q) => q.id === r.id))
+			.filter((v) => v)
+			.map((v) => v!);
 	}, [hasSearchValue, searchResults, questions]);
+
+	const suggestions = useMemo(
+		() => allSuggestions.slice(listOffset, maxSuggestions + listOffset),
+		[listOffset, allSuggestions]
+	);
 
 	useEffect(() => {
 		setSelectedIndex(0);
-	}, [suggestions]);
+		setListOffset(0);
+	}, [allSuggestions]);
 
 	useEffect(() => {
 		const onKeyDown = (ev: KeyboardEvent) => {
@@ -111,12 +117,15 @@ const QuestionSelector: React.FC<Props> = ({ questions, onSelect }) => {
 				ev.preventDefault();
 				ev.stopPropagation();
 				const offset = ev.key === "ArrowUp" ? -1 : 1;
-				setSelectedIndex((i) =>
-					Math.max(
-						0,
-						Math.min(suggestions.length - 1, maxSuggestions - 1, i + offset)
-					)
-				);
+				if (selectedIndex === 2 && ev.key === "ArrowDown") {
+					setListOffset((i) =>
+						Math.min(i + 1, allSuggestions.length - maxSuggestions + 1)
+					);
+				} else if (selectedIndex === 0 && ev.key === "ArrowUp") {
+					setListOffset((i) => Math.max(i - 1, 0));
+				} else {
+					setSelectedIndex((i) => i + offset);
+				}
 			}
 		};
 
@@ -126,6 +135,7 @@ const QuestionSelector: React.FC<Props> = ({ questions, onSelect }) => {
 		};
 	});
 
+	console.log(suggestions, allSuggestions);
 	return (
 		<div className={styles.wrapper}>
 			<form
@@ -134,7 +144,7 @@ const QuestionSelector: React.FC<Props> = ({ questions, onSelect }) => {
 					if (suggestions.length) {
 						const s = suggestions[selectedIndex];
 						if (s) {
-							onSelect(s.item.id);
+							onSelect(s.id);
 						}
 					}
 				}}
@@ -151,14 +161,14 @@ const QuestionSelector: React.FC<Props> = ({ questions, onSelect }) => {
 				const active = i === selectedIndex;
 				return (
 					<div
-						key={s.item.id}
+						key={s.id}
 						className={[styles.suggestion, active && styles.activeSuggestion]
 							.filter((v) => v)
 							.join(" ")}
-						onClick={() => onSelect(s.item.id)}
+						onClick={() => onSelect(s.id)}
 						onMouseEnter={() => setSelectedIndex(i)}
 					>
-						{s.item.text}
+						{s.text}
 						{active && <div className={styles.enterHint}>Press enter</div>}
 					</div>
 				);
