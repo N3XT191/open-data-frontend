@@ -10,16 +10,18 @@ type Props = {
 	chart: Answer;
 };
 const colors = [
-	"#ffedea",
-	"#ffcec5",
-	"#ffad9f",
-	"#ff8a75",
-	"#ff5533",
-	"#e2492d",
-	"#be3d26",
-	"#9a311f",
-	"#782618",
+	"#c8dcbc",
+	"#a2c19f",
+	"#81aa7f",
+	"#639361",
+	"#437d45",
+	"#346e35",
+	"#255d26",
+	"#184e1a",
+	"#174215",
+	"#103c0c",
 ];
+
 const Map = ({ chart }: Props) => {
 	const [activeKreis, setActiveKreis] = useState(0);
 	const width = 500;
