@@ -4,6 +4,7 @@ import { scaleLinear, scaleQuantile } from "d3-scale";
 import React, { useState } from "react";
 import { Answer } from "./Interfaces";
 import geoJson from "./stadtkreise.json";
+import zurisee from "./zurisee.json";
 
 type Props = {
 	chart: Answer;
@@ -121,6 +122,18 @@ const Map = ({ chart }: Props) => {
 									fill={caseCount ? colorScale(caseCount) : "#ffffff00"}
 									onMouseEnter={() => setActiveKreis(name)}
 									onMouseLeave={() => setActiveKreis(0)}
+								/>
+							);
+						})}
+						{zurisee.features.map((feature: any) => {
+							return (
+								<path
+									data-tip={"Zürisee"}
+									key={`Zürisee`}
+									stroke="black"
+									strokeWidth={0.25}
+									d={path(feature) ?? undefined}
+									fill={"#83d8f2"}
 								/>
 							);
 						})}
