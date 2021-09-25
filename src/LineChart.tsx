@@ -15,6 +15,7 @@ import {
   chartTopPaddingNoTitle,
   chartBottomPaddingNoAxis,
   chartLeftPaddingMeasuredExtra,
+  customTheme,
 } from "./victory-theme";
 import { last } from "lodash";
 
@@ -48,8 +49,6 @@ const LineChart: React.FC<Props> = ({ chart, width, height }) => {
     [chart.data]
   );
 
-  console.log("DEBUG data", data);
-
   return (
     <CenteredLayout>
       <ChartCard>
@@ -57,6 +56,7 @@ const LineChart: React.FC<Props> = ({ chart, width, height }) => {
           width={width}
           height={height}
           scale={{ x: chart.x_axis_time ? "time" : undefined }}
+          theme={customTheme}
           padding={{
             ...defaultChartPadding,
             left: yLabelWidth

@@ -25,7 +25,7 @@ const grey900 = "#212121";
 // Typography
 export const sansSerif = "'Roboto', sans-serif";
 const letterSpacing = "normal";
-export const fontSize = 12;
+export const fontSize = 20;
 
 export const defaultChartPadding = { top: 50, right: 10, bottom: 35, left: 10 };
 export const chartTopPaddingNoTitle = 10;
