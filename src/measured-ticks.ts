@@ -29,7 +29,6 @@ export function getLabelWidth(
   if (!chartData.length) {
     return undefined;
   }
-  console.log("DEBUG labels", labels);
   return Math.max(
     ...labels.map((l) => textMeasurementCaches.plotLabel.measure(l).width)
   );

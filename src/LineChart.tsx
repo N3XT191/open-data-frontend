@@ -27,12 +27,10 @@ interface Props {
 const LineChart: React.FC<Props> = ({ chart, width, height }) => {
   const data = useMemo(() => {
     if (chart.x_axis_time) {
-      return chart.data.map((point: any) => {
-        return {
-          y: point.y,
-          x: new Date(point.x),
-        };
-      });
+      return chart.data.map((point: any) => ({
+        ...point,
+        x: new Date(point.x),
+      }));
     } else {
       return chart.data;
     }
@@ -49,6 +47,8 @@ const LineChart: React.FC<Props> = ({ chart, width, height }) => {
       ),
     [chart.data]
   );
+
+  console.log("DEBUG data", data);
 
   return (
     <CenteredLayout>
