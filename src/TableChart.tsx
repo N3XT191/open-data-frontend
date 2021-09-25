@@ -12,6 +12,40 @@ const tdStyle = {
 	border: "1px solid #999",
 	padding: "1.0rem 2.5rem",
 };
+const units = [
+	{
+		ID: "CO",
+		Einheit: "mg/m3",
+	},
+	{
+		ID: "SO2",
+		Einheit: "µg/m3",
+	},
+	{
+		ID: "O3",
+		Einheit: "µg/m3",
+	},
+	{
+		ID: "NOx",
+		Einheit: "ppb",
+	},
+	{
+		ID: "NO",
+		Einheit: "µg/m3",
+	},
+	{
+		ID: "NO2",
+		Einheit: "µg/m3",
+	},
+	{
+		ID: "PM10",
+		Einheit: "µg/m3",
+	},
+	{
+		ID: "PM2.5",
+		Einheit: "µg/m3",
+	},
+];
 const TableChart: React.FC<Props> = ({ chart, width, height }) => {
 	return (
 		<CenteredLayout>
@@ -34,7 +68,12 @@ const TableChart: React.FC<Props> = ({ chart, width, height }) => {
 						<tbody>
 							{Object.keys(chart.data.values).map((v: any) => (
 								<tr>
-									<td style={tdStyle}>{v}</td>
+									<td style={tdStyle}>
+										{v}
+										{" in [" +
+											units.find((u: any) => u.ID === v)?.Einheit +
+											"]"}
+									</td>
 									<td style={tdStyle}>
 										{Math.floor(chart.data.values[v] * 100) / 100}
 									</td>
