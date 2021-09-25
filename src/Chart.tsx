@@ -22,7 +22,7 @@ const Chart: React.FC<Props> = ({ chart, windowSize }) => {
 	const maxHeight = 800;
 	const minHeight = 300;
 	const height = windowSize.height
-		? Math.min(Math.max(windowSize.height - 300, minHeight), maxHeight)
+		? Math.min(Math.max(windowSize.height - 350, minHeight), maxHeight)
 		: minHeight;
 
 	if (chart.chart_type === "line") {
