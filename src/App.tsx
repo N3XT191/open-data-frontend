@@ -4,7 +4,7 @@ import { chartSettings, getQuestions } from "./api";
 import { Question } from "./Interfaces";
 import QuestionSelector from "./QuestionSelector";
 import { Background } from "./Background";
-import { shuffle } from "lodash";
+import { shuffle, groupBy } from "lodash";
 import { Route, useHistory } from "react-router-dom";
 
 function App() {
@@ -27,7 +27,17 @@ function App() {
         ev.stopPropagation();
 
         history.push(
-          "/ask/" + shuffle(chartSettings.filter((s) => s.id !== 0))[0]?.id
+          "/ask/" +
+            shuffle(
+              shuffle([
+                ...Object.values(
+                  groupBy(
+                    chartSettings.filter((s) => s.id !== 0),
+                    (e) => e.chart_type
+                  )
+                ),
+              ])[0] || []
+            )[0]?.id
         );
       }
     };
