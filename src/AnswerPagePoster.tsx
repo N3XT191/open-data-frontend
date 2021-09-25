@@ -60,18 +60,18 @@ const styles = {
 		justify-content: center;
 	`,
 	botRightBox: css`
-		height: 200px;
+		height: 180px;
 		width: 600px;
 		position: absolute;
-		bottom: 20px;
+		bottom: 50px;
 		right: 0;
 		background-color: #585759;
 		color: white;
 		display: flex;
-		justify-content: space-around;
+		justify-content: center;
 		align-items: center;
-		font-size: 35px;
-		padding: 20px;
+		font-size: 40px;
+		padding: 0px;
 	`,
 };
 
@@ -151,7 +151,15 @@ const AnswerPagePoster: React.FC<Props> = ({ question }) => {
 				</div>
 			</div>
 			<div className={styles.botRightBox}>
-				<div>
+				<div
+					style={{
+						display: "flex",
+						flexDirection: "column",
+						justifyContent: "end",
+						alignItems: "end",
+						marginRight: "20px",
+					}}
+				>
 					<div>
 						What would <i>you</i> ask?
 					</div>
@@ -162,7 +170,7 @@ const AnswerPagePoster: React.FC<Props> = ({ question }) => {
 				<img
 					src="/qrcode.svg"
 					alt=""
-					style={{ padding: "20px", boxSizing: "border-box", height: "100" }}
+					style={{ boxSizing: "border-box", height: "80%" }}
 				/>
 			</div>
 		</div>
