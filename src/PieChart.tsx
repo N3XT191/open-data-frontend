@@ -17,13 +17,9 @@ const PieChart: React.FC<Props> = ({ chart, width, height }) => {
 					height={height}
 					colorScale="qualitative"
 					data={chart.data}
-				>
-					<VictoryLabel
-						text={`3pt Attempts Per Game Averages`}
-						textAnchor="middle"
-						style={{ fill: "#aaa", fontSize: 16 }}
-					/>
-				</VictoryPie>
+					labelRadius={width / 3.5}
+					style={{ labels: { fill: "white", fontSize: 35 } }}
+				></VictoryPie>
 			</ChartCard>
 		</CenteredLayout>
 	);
