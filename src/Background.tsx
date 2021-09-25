@@ -16,7 +16,7 @@ const styles = {
     left: 0;
     width: 200%;
     height: 200%;
-    background: red;
+    background: #743fca;
   `,
   leftTriangle: css`
     transform: translate(-50%, 50%) rotate(55deg);
