@@ -17,6 +17,7 @@ const styles = {
 		margin-top: 0;
 		padding-top: 50px;
 		margin-right: 150px;
+		margin-bottom: 20px;
 		@media (max-width: 900px) {
 			font-size: 30px;
 			margin: 20px;
@@ -24,6 +25,13 @@ const styles = {
 			padding-top: 20px;
 			margin-right: 150px;
 		}
+	`,
+	subtitle: css`
+		font-size: 30px;
+		font-weight: 300;
+		margin: 50px;
+		margin-top: 10px;
+		color: grey;
 	`,
 	toolbar: css`
 		display: flex;
@@ -43,12 +51,27 @@ const styles = {
 		font-size: 18px;
 		color: white;
 		cursor: pointer;
+		display: none;
 	`,
 	mainBody: css`
-		height: calc(100% - 280px);
+		height: calc(100% - 450px);
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
+	`,
+	botRightBox: css`
+		height: 200px;
+		width: 600px;
+		position: absolute;
+		bottom: 20px;
+		right: 0;
+		background-color: #585759;
+		color: white;
+		display: flex;
+		justify-content: space-around;
+		align-items: center;
+		font-size: 35px;
+		padding: 20px;
 	`,
 };
 
@@ -78,7 +101,19 @@ function useWindowSize() {
 	return windowSize;
 }
 
-const AnswerPage: React.FC<Props> = ({ question }) => {
+const names = ["Philippe", "Marc"];
+const times = [
+	"today",
+	"this morning",
+	"yesterday",
+	"yesterday evening",
+	"yesterday night",
+	"yesterday morning",
+	"on Friday",
+	"Friday night",
+];
+
+const AnswerPagePoster: React.FC<Props> = ({ question }) => {
 	const [answer, setAnswer] = useState<Answer | undefined>();
 
 	useEffect(() => {
@@ -93,10 +128,15 @@ const AnswerPage: React.FC<Props> = ({ question }) => {
 	}, [question]);
 
 	const windowSize = useWindowSize();
+	const randomName = names[Math.floor(Math.random() * names.length)];
+	const randomTime = times[Math.floor(Math.random() * times.length)];
 
 	return (
-		<div style={{ height: "100%" }}>
+		<div style={{ height: "100%", display: "relative" }}>
 			<div className={styles.question}>{question?.text}</div>
+			<div
+				className={styles.subtitle}
+			>{`Asked at Hackzurich, ${randomTime}, by ${randomName}`}</div>
 			<div className={styles.mainBody}>
 				{answer && windowSize ? (
 					<Chart chart={answer} windowSize={windowSize} />
@@ -110,8 +150,23 @@ const AnswerPage: React.FC<Props> = ({ question }) => {
 					</Link>
 				</div>
 			</div>
+			<div className={styles.botRightBox}>
+				<div>
+					<div>
+						What would <i>you</i> ask?
+					</div>
+					<div>
+						<b>ask-open-data.ch</b>
+					</div>
+				</div>
+				<img
+					src="/qrcode.svg"
+					alt=""
+					style={{ padding: "20px", boxSizing: "border-box", height: "100" }}
+				/>
+			</div>
 		</div>
 	);
 };
 
-export default AnswerPage;
+export default AnswerPagePoster;
