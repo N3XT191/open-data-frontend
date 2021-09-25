@@ -14,12 +14,13 @@ const NumberChart: React.FC<Props> = ({ chart, width, height }) => {
 			<ChartCard>
 				<div
 					style={{
-						width: "100%",
 						display: "flex",
 						justifyContent: "center",
-						fontSize: 45,
-						paddingTop: 100,
-						paddingBottom: 100,
+						alignItems: "center",
+						fontSize: 65,
+						margin: 60,
+						color: "#743fca",
+						fontWeight: 600,
 					}}
 				>
 					{chart.data[0].y}
