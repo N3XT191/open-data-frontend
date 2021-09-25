@@ -136,6 +136,48 @@ for (let i = 59; i <= 62; i++) {
 		graph_label: "asdf",
 	});
 }
+for (let i = 63; i <= 68; i++) {
+	chartSettings.push({
+		id: i,
+		chart_type: "pie",
+		x_axis_type: false,
+		graph_label: "asdf",
+	});
+}
+for (let i = 69; i <= 69; i++) {
+	chartSettings.push({
+		id: i,
+		chart_type: "bar",
+		x_axis_type: false,
+		graph_label: "asdf",
+	});
+}
+chartSettings.push({
+	id: 70,
+	chart_type: "map",
+	x_axis_type: false,
+});
+for (let i = 71; i <= 72; i++) {
+	chartSettings.push({
+		id: i,
+		chart_type: "bar",
+		x_axis_type: false,
+		graph_label: "asdf",
+	});
+}
+chartSettings.push({
+	id: 73,
+	chart_type: "number",
+	x_axis_type: false,
+});
+for (let i = 74; i <= 75; i++) {
+	chartSettings.push({
+		id: i,
+		chart_type: "bar",
+		x_axis_type: false,
+		graph_label: "Year of Birth of dogs",
+	});
+}
 
 export const askQuestion = async (question_id: number) => {
 	const settings = chartSettings.find((s) => s.id === question_id)!;
