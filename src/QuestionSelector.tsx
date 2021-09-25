@@ -3,6 +3,7 @@ import { SSL_OP_ALLOW_UNSAFE_LEGACY_RENEGOTIATION } from "constants";
 import Fuse from "fuse.js";
 import { useEffect } from "react";
 import { useMemo, useState } from "react";
+import { getSearchResults } from "./api";
 import { Question } from "./Interfaces";
 
 const fuseOptions = {
@@ -72,19 +73,51 @@ interface Props {
   onSelect: (id: number | undefined) => void;
 }
 
+interface SearchResult {
+  id: number;
+  rank: number;
+}
+
 const QuestionSelector: React.FC<Props> = ({ questions, onSelect }) => {
   const [searchValue, setSearchValue] = useState("");
   const [selectedIndex, setSelectedIndex] = useState(0);
+  const [searchResults, setSearchResults] = useState<SearchResult[]>();
 
-  const fuse = useMemo(() => new Fuse(questions, fuseOptions), [questions]);
+  const hasSearchValue = !!searchValue.trim();
+
+  useEffect(() => {
+    if (!hasSearchValue) {
+      setSearchResults([]);
+    }
+
+    let shouldIgnore = false;
+
+    getSearchResults(searchValue)
+      .then((res) => {
+        if (!shouldIgnore) {
+          setSearchResults(res);
+        }
+      })
+      .catch((err) => console.error("search failed", err));
+
+    return () => {
+      shouldIgnore = true;
+    };
+  }, [hasSearchValue, searchValue]);
+
   const suggestions = useMemo(() => {
-    const inputValue = searchValue.trim().toLowerCase();
-    const inputLength = inputValue.length;
-
-    return inputLength === 0
-      ? []
-      : fuse.search(searchValue).slice(0, maxSuggestions);
-  }, [searchValue, fuse]);
+    if (!hasSearchValue) {
+      // TODO random suggested questions go here
+      return [];
+    }
+    if (hasSearchValue && !searchResults) {
+      return [];
+    }
+    return (searchResults || [])
+      .map((r) => ({ r, q: questions.find((q) => q.id === r.id) }))
+      .filter(({ r, q }) => q)
+      .map(({ r, q }) => ({ rank: r, item: q! }));
+  }, [hasSearchValue, searchResults, questions]);
 
   useEffect(() => {
     setSelectedIndex(0);
