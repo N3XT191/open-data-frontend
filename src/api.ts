@@ -38,30 +38,104 @@ export const getQuestions = async () => await getData("/questions");
 	];*/
 
 const chartSettings = [
-	{},
 	{
+		id: 1,
 		chart_type: "line",
 		x_axis_type: true,
 		graph_label: "CO2 in [Unit] over time",
 	},
 	{
+		id: 2,
 		chart_type: "line",
 		x_axis_type: true,
 		graph_label: "Ozone in [Unit] over time",
 	},
 	{
-		chart_type: "pie",
+		id: 3,
+		chart_type: "line",
 		x_axis_type: true,
 		graph_label: "Air pollution [normalized] over time",
 	},
-];
+	{
+		id: 4,
+		chart_type: "table",
+		x_axis_type: true,
+		graph_label: "Current air pollution in Zurich",
+	},
+	{
+		id: 5,
+		chart_type: "table",
+		x_axis_type: true,
+		graph_label: "Current air pollution in Zurich",
+	},
+	{
+		id: 6,
+		chart_type: "line",
+		x_axis_type: true,
+		graph_label: "Nitrogen Monoxide in [Unit] over time",
+	},
+	{
+		id: 7,
+		chart_type: "line",
+		x_axis_type: true,
+		graph_label: "Nitrogen Dioxide in [Unit] over time",
+	},
+	{
+		id: 8,
+		chart_type: "line",
+		x_axis_type: true,
+		graph_label: "Particulate Matter in [Unit] over time",
+	},
+	{
+		id: 9,
+		chart_type: "line",
+		x_axis_type: true,
+		graph_label: "Particulate Matter in [Unit] over time",
+	},
+	{
+		id: 10,
+		chart_type: "line",
+		x_axis_type: true,
+		graph_label: "PM2.5 in [Unit] over time",
+	},
+	{
+		id: 11,
+		chart_type: "line",
+		x_axis_type: true,
+		graph_label: "Sulphur Dioxide in [Unit] over time",
+	},
+	{
+		id: 12,
+		chart_type: "line",
+		x_axis_type: true,
+		graph_label: "Air pollution [normalized] over time",
+	},
+	{
+		id: 13,
+		chart_type: "multi-line",
+		x_axis_type: true,
+		graph_label: "Air pollution [normalized] over time",
+	},
+	{
+		id: 14,
+		chart_type: "multi-line",
+		x_axis_type: true,
+		graph_label: "Air pollution [normalized] over time",
+	},
+] as any[];
+
+for (let i = 15; i <= 57; i++) {
+	chartSettings.push({ id: i, chart_type: "map" });
+}
+
 export const askQuestion = async (question_id: number) => {
+	const settings = chartSettings.find((s) => s.id === question_id)!;
 	return {
 		id: question_id,
 		data: await sendData("/answer", { id: question_id }),
-		chart_type: chartSettings[question_id].chart_type,
-		x_axis_time: chartSettings[question_id].x_axis_type,
-		graph_label: chartSettings[question_id].graph_label,
+		chart_type: settings.chart_type,
+		x_axis_time: settings.x_axis_type,
+		graph_label: settings.graph_label,
 	} as Answer;
 };
 /*const answers = [

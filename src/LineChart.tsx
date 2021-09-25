@@ -1,5 +1,5 @@
 import { Answer } from "./Interfaces";
-import { VictoryChart, VictoryLabel, VictoryLine } from "victory";
+import { VictoryAxis, VictoryChart, VictoryLabel, VictoryLine } from "victory";
 
 interface Props {
 	chart: Answer;
@@ -25,10 +25,15 @@ const LineChart: React.FC<Props> = ({ chart }) => {
 				textAnchor="middle"
 				text={chart.graph_label}
 			/>
+			<VictoryAxis crossAxis={true} style={{ tickLabels: { fill: "none" } }} />
+			<VictoryAxis
+				dependentAxis={true}
+				style={{ tickLabels: { fill: "none" } }}
+			/>
 			<VictoryLine
-				interpolation={"linear"}
+				interpolation={"basis"}
 				data={data}
-				style={{ data: { stroke: "#c43a31" } }}
+				style={{ data: { stroke: "#E00414", strokeWidth: 1 } }}
 			/>
 		</VictoryChart>
 	);
