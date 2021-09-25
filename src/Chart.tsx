@@ -12,7 +12,6 @@ interface Props {
 }
 
 const Chart: React.FC<Props> = ({ chart }) => {
-  console.log(chart);
   if (chart.chart_type === "line") {
     return <LineChart chart={chart} />;
   } else if (chart.chart_type === "multi-line") {
