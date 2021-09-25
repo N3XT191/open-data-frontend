@@ -32,6 +32,22 @@ export const chartTopPaddingNoTitle = 10;
 export const chartBottomPaddingNoAxis = 10;
 export const chartLeftPaddingMeasuredExtra = 20;
 
+export const dotsBackgroundStyle = { fill: "url(#dots)", fillOpacity: 0.2 };
+export const dotsBackgroundDefs = (
+  <defs>
+    <pattern
+      id="dots"
+      x="0"
+      y="0"
+      width="20"
+      height="20"
+      patternUnits="userSpaceOnUse"
+    >
+      <circle fill="black" cx="10" cy="10" r="1.5"></circle>
+    </pattern>
+  </defs>
+);
+
 // Layout
 const padding = 8;
 const baseProps = {

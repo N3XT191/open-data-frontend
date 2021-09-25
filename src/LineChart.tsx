@@ -16,6 +16,8 @@ import {
   chartBottomPaddingNoAxis,
   chartLeftPaddingMeasuredExtra,
   customTheme,
+  dotsBackgroundStyle,
+  dotsBackgroundDefs,
 } from "./victory-theme";
 import { last } from "lodash";
 
@@ -57,6 +59,7 @@ const LineChart: React.FC<Props> = ({ chart, width, height }) => {
           height={height}
           scale={{ x: chart.x_axis_time ? "time" : undefined }}
           theme={customTheme}
+          style={{ background: dotsBackgroundStyle }}
           padding={{
             ...defaultChartPadding,
             left: yLabelWidth
@@ -70,6 +73,8 @@ const LineChart: React.FC<Props> = ({ chart, width, height }) => {
               : defaultChartPadding.top,
           }}
         >
+          {dotsBackgroundDefs}
+
           <VictoryLabel
             x={width / 2}
             y={25}
