@@ -1,4 +1,5 @@
 import { css } from "@emotion/css";
+import { CornerTriangle } from "./CornerTriangle";
 
 const styles = {
   wrapper: css`
@@ -9,31 +10,35 @@ const styles = {
     height: 100vh;
     background: #eeeeee;
     z-index: -10;
+    user-select: none;
+    pointer-events: none;
   `,
-  triangle: css`
+  leftTriangle: css`
     position: absolute;
     top: 0;
     left: 0;
-    width: 200%;
-    height: 200%;
-    background: #743fca;
-  `,
-  leftTriangle: css`
-    transform: translate(-50%, 50%) rotate(55deg);
+    width: 100%;
+    height: 100%;
   `,
   rightTriangle: css`
-    transform: translate(25%, -30%) rotate(75deg);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform: rotate(180deg);
   `,
 };
 
 export const Background = () => {
   return (
     <div className={styles.wrapper}>
-      {/* <div className={[styles.triangle, styles.leftTriangle].join(" ")} />
-      <div className={[styles.triangle, styles.rightTriangle].join(" ")} /> */}
+      <div className={styles.leftTriangle}>
+        <CornerTriangle width={350} height={500} />
+      </div>
+      <div className={styles.rightTriangle}>
+        <CornerTriangle width={180} height={400} />
+      </div>
     </div>
   );
 };
-
-// temp = df['2019':'2020']
-// temp = temp[temp >= 1000]
