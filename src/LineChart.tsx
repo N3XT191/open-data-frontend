@@ -8,6 +8,7 @@ import {
   defaultChartPadding,
   chartTopPaddingNoTitle,
   chartBottomPaddingNoAxis,
+  chartLeftPaddingMeasuredExtra,
 } from "./victory-theme";
 import { last } from "lodash";
 
@@ -52,7 +53,9 @@ const LineChart: React.FC<Props> = ({ chart, width, height }) => {
           scale={{ x: chart.x_axis_time ? "time" : undefined }}
           padding={{
             ...defaultChartPadding,
-            left: yLabelWidth ? yLabelWidth : defaultChartPadding.left,
+            left: yLabelWidth
+              ? yLabelWidth + chartLeftPaddingMeasuredExtra
+              : defaultChartPadding.left,
             top: chart.graph_label?.trim().length
               ? defaultChartPadding.top
               : chartTopPaddingNoTitle,

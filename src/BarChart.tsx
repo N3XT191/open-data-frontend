@@ -4,6 +4,7 @@ import { CenteredLayout } from "./CenteredLayout";
 import { ChartCard } from "./ChartCard";
 import {
   chartBottomPaddingNoAxis,
+  chartLeftPaddingMeasuredExtra,
   chartTopPaddingNoTitle,
   customTheme,
   defaultChartPadding,
@@ -31,7 +32,9 @@ const BarChart: React.FC<Props> = ({ chart, width, height }) => {
           theme={customTheme}
           padding={{
             ...defaultChartPadding,
-            left: yLabelWidth ? yLabelWidth + 20 : defaultChartPadding.left,
+            left: yLabelWidth
+              ? yLabelWidth + chartLeftPaddingMeasuredExtra
+              : defaultChartPadding.left,
             top: chart.graph_label?.trim().length
               ? defaultChartPadding.top
               : chartTopPaddingNoTitle,
