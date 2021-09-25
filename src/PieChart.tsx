@@ -1,5 +1,5 @@
 import { Answer } from "./Interfaces";
-import { VictoryLabel, VictoryPie } from "victory";
+import { VictoryPie } from "victory";
 import { CenteredLayout } from "./CenteredLayout";
 import { ChartCard } from "./ChartCard";
 
