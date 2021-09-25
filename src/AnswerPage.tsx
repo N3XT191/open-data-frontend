@@ -10,6 +10,16 @@ interface Props {
 }
 
 const styles = {
+  question: css`
+    font-size: 45px;
+    font-weight: 500;
+    margin: 50px;
+
+    @media (max-width: 900px) {
+      font-size: 30px;
+      margin: 20px;
+    }
+  `,
   toolbar: css`
     display: flex;
     justify-content: center;
@@ -46,9 +56,7 @@ const AnswerPage: React.FC<Props> = ({ question, unselectQuestion }) => {
 
   return (
     <>
-      <div style={{ fontSize: 45, fontWeight: 500, margin: 50 }}>
-        {question?.text}
-      </div>
+      <div className={styles.question}>{question?.text}</div>
       {answer ? <Chart chart={answer} /> : <div>loading...</div>}
       <div className={styles.toolbar}>
         <button className={styles.button}>Share</button>
