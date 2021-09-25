@@ -8,5 +8,5 @@ export interface Answer {
 	data: any;
 	chart_type: "value" | "bar" | "line" | "pie";
 	x_axis_time?: boolean;
-	graph_title: string;
+	graph_label: string;
 }

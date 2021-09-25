@@ -61,6 +61,7 @@ export const askQuestion = async (question_id: number) => {
 		data: await sendData("/answer", { id: question_id }),
 		chart_type: chartSettings[question_id].chart_type,
 		x_axis_time: chartSettings[question_id].x_axis_type,
+		graph_label: chartSettings[question_id].graph_label,
 	} as Answer;
 };
 /*const answers = [

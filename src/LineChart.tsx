@@ -20,9 +20,10 @@ const LineChart: React.FC<Props> = ({ chart }) => {
 	return (
 		<VictoryChart height={300} scale={{ x: "time" }}>
 			<VictoryLabel
-				text={chart.graph_title}
+				x={225}
+				y={25}
 				textAnchor="middle"
-				style={{ fill: "#aaa", fontSize: 10 }}
+				text={chart.graph_label}
 			/>
 			<VictoryLine
 				interpolation={"linear"}
