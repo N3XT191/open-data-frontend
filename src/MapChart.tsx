@@ -27,14 +27,17 @@ const colors = [
 const Map = ({ chart }: Props) => {
   const [activeKreis, setActiveKreis] = useState(0);
   const width = 500;
+  const scaleX = 0.85; // HACK is squashed without this
   const [minX, minY, maxX, maxY] = bbox(geoJson);
-  const height = ((maxY - minY) / (maxX - minX)) * width;
-  const x = scaleLinear().range([0, width]).domain([minX, maxX]);
+  const height = ((maxY - minY) / (maxX - minX)) * width * (1 / scaleX ** 2);
+  const x = scaleLinear()
+    .range([0, width / scaleX])
+    .domain([minX, maxX]);
   const y = scaleLinear().range([0, height]).domain([maxY, minY]);
   // https://bl.ocks.org/mbostock/6216797
   const projection = geoTransform({
     point: function (px: any, py: any) {
-      this.stream.point(x(px), y(py));
+      this.stream.point(x(px) * scaleX, y(py));
     },
   });
   const path = geoPath().projection(projection);
@@ -45,6 +48,7 @@ const Map = ({ chart }: Props) => {
   const valuesWithoutCity = chart.data.values.filter(
     (v: any) => v.placeId !== 0
   );
+  const colorBarX = 440;
   return (
     <CenteredLayout>
       <ChartCard
@@ -55,17 +59,23 @@ const Map = ({ chart }: Props) => {
           textAlign: "center",
         }}
       >
-        <div style={{ fontSize: 20, opacity: 0 }}>-</div>
-        <div style={{ fontSize: 60 }}>
-          {chart.data.values.find((v: any) => v.placeId === activeKreis).value}
-          {" " + chart.data.unit}
-        </div>
         <div style={{ fontSize: 30, opacity: activeKreis ? 1 : 0 }}>
           {activeKreis ? "Kreis " + activeKreis : "asdf"}
         </div>
+        <div style={{ fontSize: 60 }}>
+          {chart.data.values.find((v: any) => v.placeId === activeKreis).value}
+        </div>
+        <div style={{ fontSize: 30 }}>{chart.data.unit}</div>
+        <div style={{ fontSize: 20, opacity: 0 }}>-</div>
       </ChartCard>
-      <ChartCard>
-        <div style={{ position: "relative", width: width, height }}>
+      <ChartCard style={{ padding: 30 }}>
+        <div
+          style={{
+            position: "relative",
+            width: width,
+            height,
+          }}
+        >
           <svg
             width={width}
             height={height}
@@ -98,7 +108,7 @@ const Map = ({ chart }: Props) => {
               </linearGradient>
             </defs>
             <rect
-              x={440}
+              x={colorBarX}
               y={10}
               width={20}
               height={100}
@@ -106,10 +116,10 @@ const Map = ({ chart }: Props) => {
               stroke="black"
               strokeWidth={0.5}
             />
-            <text x={465} y={23} fill="black">
+            <text x={colorBarX + 25} y={23} fill="black">
               {Math.max(...valuesWithoutCity.map((v: any) => v.value))}
             </text>
-            <text x={465} y={108} fill="black">
+            <text x={colorBarX + 25} y={108} fill="black">
               {Math.min(...valuesWithoutCity.map((v: any) => v.value))}
             </text>
             {geoJson.features.map((feature: any) => {
