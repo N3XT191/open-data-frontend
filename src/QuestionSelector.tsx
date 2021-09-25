@@ -1,8 +1,6 @@
 import { css } from "@emotion/css";
-import { SSL_OP_ALLOW_UNSAFE_LEGACY_RENEGOTIATION } from "constants";
 import Fuse from "fuse.js";
-import { useEffect } from "react";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Question } from "./Interfaces";
 
 const fuseOptions = {
