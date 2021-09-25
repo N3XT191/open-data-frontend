@@ -2,13 +2,15 @@ import { Answer } from "./Interfaces";
 
 interface Props {
 	chart: Answer;
+	width: number;
+	height: number;
 }
 
 const tdStyle = {
 	border: "1px solid #999",
 	padding: "0.5rem",
 };
-const TableChart: React.FC<Props> = ({ chart }) => {
+const TableChart: React.FC<Props> = ({ chart, width, height }) => {
 	return (
 		<div
 			style={{

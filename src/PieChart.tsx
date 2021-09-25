@@ -5,12 +5,19 @@ import { ChartCard } from "./ChartCard";
 
 interface Props {
 	chart: Answer;
+	width: number;
+	height: number;
 }
-const PieChart: React.FC<Props> = ({ chart }) => {
+const PieChart: React.FC<Props> = ({ chart, width, height }) => {
 	return (
 		<CenteredLayout>
 			<ChartCard>
-				<VictoryPie height={300} colorScale="qualitative" data={chart.data}>
+				<VictoryPie
+					width={width}
+					height={height}
+					colorScale="qualitative"
+					data={chart.data}
+				>
 					<VictoryLabel
 						text={`3pt Attempts Per Game Averages`}
 						textAnchor="middle"

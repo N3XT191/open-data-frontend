@@ -5,8 +5,10 @@ import { CenteredLayout } from "./CenteredLayout";
 
 interface Props {
 	chart: Answer;
+	width: number;
+	height: number;
 }
-const LineChart: React.FC<Props> = ({ chart }) => {
+const LineChart: React.FC<Props> = ({ chart, width, height }) => {
 	let data;
 	if (chart.x_axis_time) {
 		data = chart.data.map((point: any) => {
@@ -23,7 +25,8 @@ const LineChart: React.FC<Props> = ({ chart }) => {
 		<CenteredLayout>
 			<ChartCard>
 				<VictoryChart
-					height={300}
+					width={width}
+					height={height}
 					scale={{ x: chart.x_axis_time ? "time" : undefined }}
 				>
 					<VictoryLabel

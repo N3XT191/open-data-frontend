@@ -4,9 +4,11 @@ import { Answer } from "./Interfaces";
 
 interface Props {
 	chart: Answer;
+	width: number;
+	height: number;
 }
 
-const NumberChart: React.FC<Props> = ({ chart }) => {
+const NumberChart: React.FC<Props> = ({ chart, width, height }) => {
 	return (
 		<CenteredLayout>
 			<ChartCard>

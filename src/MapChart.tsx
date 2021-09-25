@@ -10,6 +10,8 @@ import zurisee from "./zurisee.json";
 
 type Props = {
 	chart: Answer;
+	width: number;
+	height: number;
 };
 const colors = [
 	"#c8dcbc",
@@ -24,12 +26,10 @@ const colors = [
 	"#103c0c",
 ];
 
-const Map = ({ chart }: Props) => {
+const Map = ({ chart, width, height }: Props) => {
 	const [activeKreis, setActiveKreis] = useState(0);
-	const width = 500;
 	const scaleX = 0.85; // HACK is squashed without this
 	const [minX, minY, maxX, maxY] = bbox(geoJson);
-	const height = ((maxY - minY) / (maxX - minX)) * width * (1 / scaleX ** 2);
 	const x = scaleLinear()
 		.range([0, width / scaleX])
 		.domain([minX, maxX]);
