@@ -14,6 +14,10 @@ const styles = {
     display: flex;
     justify-content: center;
     margin: 30px 0;
+
+    @media (max-width: 480px) {
+      flex-direction: column;
+    }
   `,
   button: css`
     background: none;

@@ -49,24 +49,35 @@ const Map = ({ chart }: Props) => {
     (v: any) => v.placeId !== 0
   );
   const colorBarX = 440;
+
+  let separateRowUnit = chart.data.unit;
+  let suffixUnit = "";
+  if (separateRowUnit === "%") {
+    separateRowUnit = "";
+    suffixUnit = "%";
+  }
+
   return (
     <CenteredLayout>
       <ChartCard
         style={{
           width: 200,
           marginRight: 30,
+          marginBottom: 30,
           padding: 30,
           textAlign: "center",
         }}
       >
-        <div style={{ fontSize: 30, opacity: activeKreis ? 1 : 0 }}>
-          {activeKreis ? "Kreis " + activeKreis : "asdf"}
+        <div style={{ fontSize: 30 }}>
+          {activeKreis ? "Kreis " + activeKreis : "All of Zurich"}
         </div>
         <div style={{ fontSize: 60 }}>
           {chart.data.values.find((v: any) => v.placeId === activeKreis).value}
+          {suffixUnit}
         </div>
-        <div style={{ fontSize: 30 }}>{chart.data.unit}</div>
-        <div style={{ fontSize: 20, opacity: 0 }}>-</div>
+        {separateRowUnit && (
+          <div style={{ fontSize: 30 }}>{separateRowUnit}</div>
+        )}
       </ChartCard>
       <ChartCard style={{ padding: 30 }}>
         <div

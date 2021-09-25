@@ -10,6 +10,10 @@ const styles = {
     flex-direction: row;
     justify-content: center;
     align-items: center;
+
+    @media (max-width: 900px) {
+      flex-direction: column;
+    }
   `,
   inner: css``,
 };
