@@ -26,6 +26,7 @@ const AnswerPage: React.FC<Props> = ({ question, unselectQuestion }) => {
       <div style={{ fontSize: 45, fontWeight: 500, margin: 50 }}>
         {question?.text}
       </div>
+      <button onClick={unselectQuestion}>ask other question</button>
       {answer ? <Chart chart={answer} /> : <div>loading...</div>}
     </>
   );

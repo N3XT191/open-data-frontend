@@ -29,8 +29,8 @@ const styles = {
 export const Background = () => {
   return (
     <div className={styles.wrapper}>
-      <div className={[styles.triangle, styles.leftTriangle].join(" ")} />
-      <div className={[styles.triangle, styles.rightTriangle].join(" ")} />
+      {/* <div className={[styles.triangle, styles.leftTriangle].join(" ")} />
+      <div className={[styles.triangle, styles.rightTriangle].join(" ")} /> */}
     </div>
   );
 };
