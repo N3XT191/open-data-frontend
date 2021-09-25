@@ -27,10 +27,7 @@ function App() {
         ev.stopPropagation();
 
         history.push(
-          "/ask/" +
-            shuffle(
-              chartSettings.filter((s) => s.id !== 0 && s.chart_type === "line")
-            )[0]?.id
+          "/ask/" + shuffle(chartSettings.filter((s) => s.id !== 0))[0]?.id
         );
       }
     };
