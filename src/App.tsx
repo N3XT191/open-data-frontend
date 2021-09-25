@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import AnswerPage from "./AnswerPage";
-import { getQuestions } from "./api";
+import { chartSettings, getQuestions } from "./api";
 import { Question } from "./Interfaces";
 import QuestionSelector from "./QuestionSelector";
 import { Background } from "./Background";
+import { shuffle } from "lodash";
 
 function App() {
   const [questions, setQuestions] = useState<Question[]>([]);
@@ -19,6 +20,28 @@ function App() {
     };
     getData();
   }, []);
+
+  useEffect(() => {
+    const onKeyDown = (ev: KeyboardEvent) => {
+      if (ev.key === "r" && ev.ctrlKey) {
+        ev.preventDefault();
+        ev.stopPropagation();
+
+        setSelectedQuestion(
+          shuffle(
+            chartSettings.filter(
+              (s) => s.id !== selectedQuestion && s.chart_type === "bar"
+            )
+          )[0]?.id
+        );
+      }
+    };
+
+    document.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.removeEventListener("keydown", onKeyDown);
+    };
+  });
 
   return (
     <>

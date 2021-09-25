@@ -32,7 +32,7 @@ const sendData = async (
 
 export const getQuestions = async () => await getData("/questions");
 
-const chartSettings: Omit<Answer, "data">[] = [
+export const chartSettings: Omit<Answer, "data">[] = [
   {
     id: 1,
     chart_type: "line",

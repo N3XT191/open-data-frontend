@@ -12,10 +12,7 @@ const BarChart: React.FC<Props> = ({ chart }) => {
   return (
     <CenteredLayout>
       <ChartCard>
-        <VictoryChart
-          domainPadding={25}
-          padding={{ top: 50, right: 50, bottom: 50, left: 190 }}
-        >
+        <VictoryChart domainPadding={25}>
           <VictoryLabel
             x={225}
             y={25}
