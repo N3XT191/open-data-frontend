@@ -5,62 +5,63 @@ import { Question } from "./Interfaces";
 import QuestionSelector from "./QuestionSelector";
 import { Background } from "./Background";
 import { shuffle } from "lodash";
+import { Redirect, Route, useHistory } from "react-router-dom";
 
 function App() {
-  const [questions, setQuestions] = useState<Question[]>([]);
+	const [questions, setQuestions] = useState<Question[]>([]);
 
-  const [selectedQuestion, setSelectedQuestion] = useState<
-    number | undefined
-  >();
+	const history = useHistory();
 
-  useEffect(() => {
-    const getData = async () => {
-      const data = await getQuestions();
-      setQuestions(data);
-    };
-    getData();
-  }, []);
+	useEffect(() => {
+		const getData = async () => {
+			const data = await getQuestions();
+			setQuestions(data);
+		};
+		getData();
+	}, []);
 
-  useEffect(() => {
-    const onKeyDown = (ev: KeyboardEvent) => {
-      if (ev.key === "r" && (ev.altKey || ev.metaKey)) {
-        ev.preventDefault();
-        ev.stopPropagation();
+	useEffect(() => {
+		const onKeyDown = (ev: KeyboardEvent) => {
+			if (ev.key === "r" && (ev.altKey || ev.ctrlKey)) {
+				ev.preventDefault();
+				ev.stopPropagation();
 
-        setSelectedQuestion(
-          shuffle(
-            chartSettings.filter(
-              (s) => s.id !== selectedQuestion && s.chart_type === "line"
-            )
-          )[0]?.id
-        );
-      }
-    };
+				history.push(
+					"/ask/" +
+						shuffle(
+							chartSettings.filter((s) => s.id !== 0 && s.chart_type === "line")
+						)[0]?.id
+				);
+			}
+		};
 
-    document.addEventListener("keydown", onKeyDown);
-    return () => {
-      document.removeEventListener("keydown", onKeyDown);
-    };
-  });
+		document.addEventListener("keydown", onKeyDown);
+		return () => {
+			document.removeEventListener("keydown", onKeyDown);
+		};
+	});
 
-  return (
-    <>
-      {selectedQuestion ? (
-        <AnswerPage
-          question={questions.find((q) => q.id === selectedQuestion)}
-          unselectQuestion={() => setSelectedQuestion(undefined)}
-        />
-      ) : (
-        <QuestionSelector
-          questions={questions}
-          onSelect={async (id) => {
-            setSelectedQuestion(id);
-          }}
-        />
-      )}
-      <Background />
-    </>
-  );
+	return (
+		<>
+			<div>
+				<Route
+					path="/ask/:q"
+					render={(routeProps) => (
+						<AnswerPage
+							question={questions.find(
+								(q) => q.id === +routeProps.match.params.q
+							)}
+						/>
+					)}
+				></Route>
+				<Route exact path="/ask">
+					<QuestionSelector questions={questions} />
+				</Route>
+				<Redirect from="/" to="/ask" />
+			</div>
+			<Background />
+		</>
+	);
 }
 
 export default App;
