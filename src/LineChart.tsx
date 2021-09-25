@@ -1,5 +1,11 @@
 import { Answer } from "./Interfaces";
-import { VictoryAxis, VictoryChart, VictoryLabel, VictoryLine } from "victory";
+import {
+  VictoryArea,
+  VictoryAxis,
+  VictoryChart,
+  VictoryLabel,
+  VictoryLine,
+} from "victory";
 import { ChartCard } from "./ChartCard";
 import { CenteredLayout } from "./CenteredLayout";
 import { useMemo } from "react";
@@ -71,11 +77,17 @@ const LineChart: React.FC<Props> = ({ chart, width, height }) => {
             text={chart.graph_label}
           />
 
-          <VictoryLine
-            interpolation={"basis"}
-            data={data}
-            style={{ data: { stroke: "#E00414", strokeWidth: 1 } }}
-          />
+          {data[0]?.y_low !== undefined && (
+            <VictoryArea
+              data={data.map((e: any) => ({
+                x: e.x,
+                y0: e.y_low,
+                y: e.y_high,
+              }))}
+              style={{ data: { fill: "#ccc" } }}
+            />
+          )}
+          <VictoryLine data={data} />
 
           <VictoryAxis />
           <VictoryAxis tickFormat={tickFormat} dependentAxis={true} />
