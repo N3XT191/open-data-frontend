@@ -1,3 +1,4 @@
+import { css } from "@emotion/css";
 import { useEffect, useState } from "react";
 import { askQuestion } from "./api";
 import Chart from "./Chart";
@@ -7,6 +8,24 @@ interface Props {
   question: Question | undefined;
   unselectQuestion: () => void;
 }
+
+const styles = {
+  toolbar: css`
+    display: flex;
+    justify-content: center;
+    margin: 30px 0;
+  `,
+  button: css`
+    background: none;
+    border: none;
+    background: #743fca;
+    margin: 10px 10px;
+    padding: 15px 30px;
+    font-size: 18px;
+    color: white;
+  `,
+};
+
 const AnswerPage: React.FC<Props> = ({ question, unselectQuestion }) => {
   const [answer, setAnswer] = useState<Answer | undefined>();
 
@@ -26,8 +45,13 @@ const AnswerPage: React.FC<Props> = ({ question, unselectQuestion }) => {
       <div style={{ fontSize: 45, fontWeight: 500, margin: 50 }}>
         {question?.text}
       </div>
-      <button onClick={unselectQuestion}>ask other question</button>
       {answer ? <Chart chart={answer} /> : <div>loading...</div>}
+      <div className={styles.toolbar}>
+        <button className={styles.button}>Share</button>
+        <button className={styles.button} onClick={unselectQuestion}>
+          Ask another question
+        </button>
+      </div>
     </>
   );
 };
