@@ -3,6 +3,7 @@ import { VictoryBar, VictoryChart, VictoryAxis, VictoryLabel } from "victory";
 import { CenteredLayout } from "./CenteredLayout";
 import { ChartCard } from "./ChartCard";
 import {
+  chartBottomPaddingNoAxis,
   chartTopPaddingNoTitle,
   customTheme,
   defaultChartPadding,
@@ -49,6 +50,9 @@ const BarChart: React.FC<Props> = ({ chart, width, height }) => {
             top: chart.graph_label?.trim().length
               ? defaultChartPadding.top
               : chartTopPaddingNoTitle,
+            bottom: chart.hide_x_axis
+              ? chartBottomPaddingNoAxis
+              : defaultChartPadding.top,
           }}
         >
           <VictoryLabel
@@ -67,7 +71,7 @@ const BarChart: React.FC<Props> = ({ chart, width, height }) => {
             horizontal={true}
           ></VictoryBar>
           <VictoryAxis tickFormat={tickFormat} />
-          <VictoryAxis dependentAxis={true} />
+          {!chart.hide_x_axis && <VictoryAxis dependentAxis={true} />}
         </VictoryChart>
       </ChartCard>
     </CenteredLayout>

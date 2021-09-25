@@ -159,6 +159,7 @@ for (let i = 71; i <= 72; i++) {
   chartSettings.push({
     id: i,
     chart_type: "bar",
+    hide_x_axis: true,
   });
 }
 chartSettings.push({
@@ -170,6 +171,7 @@ for (let i = 74; i <= 75; i++) {
     id: i,
     chart_type: "bar",
     graph_label: "Year of Birth of dogs",
+    hide_x_axis: true,
   });
 }
 

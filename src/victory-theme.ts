@@ -29,6 +29,7 @@ export const fontSize = 12;
 
 export const defaultChartPadding = { top: 50, right: 10, bottom: 35, left: 10 };
 export const chartTopPaddingNoTitle = 10;
+export const chartBottomPaddingNoAxis = 10;
 
 // Layout
 const padding = 8;
