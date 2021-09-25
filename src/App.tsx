@@ -5,7 +5,7 @@ import { Question } from "./Interfaces";
 import QuestionSelector from "./QuestionSelector";
 import { Background } from "./Background";
 import { shuffle } from "lodash";
-import { Redirect, Route, useHistory } from "react-router-dom";
+import { Route, useHistory } from "react-router-dom";
 
 function App() {
 	const [questions, setQuestions] = useState<Question[]>([]);
@@ -45,6 +45,7 @@ function App() {
 		<>
 			<div>
 				<Route
+					exact={true}
 					path="/ask/:q"
 					render={(routeProps) => (
 						<AnswerPage
@@ -54,10 +55,9 @@ function App() {
 						/>
 					)}
 				></Route>
-				<Route exact path="/ask">
+				<Route exact={true} path="/ask">
 					<QuestionSelector questions={questions} />
 				</Route>
-				<Redirect from="/" to="/ask" />
 			</div>
 			<Background />
 		</>
