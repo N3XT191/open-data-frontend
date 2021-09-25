@@ -18,6 +18,13 @@ export function getLabelWidth(
     );
   }
 
+  if (chartData.some((e: any) => e[axis] === undefined)) {
+    console.log(
+      "getLabelWidth got undefined - are you sure your data has the right format",
+      chartData
+    );
+  }
+
   const labels = chartData.map((e) => tickFormat((e as any)[axis]));
   if (!chartData.length) {
     return undefined;
