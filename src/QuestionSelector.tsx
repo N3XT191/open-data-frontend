@@ -1,12 +1,15 @@
 import { css } from "@emotion/css";
-import { useEffect } from "react";
+import { useEffect, useLayoutEffect, useRef } from "react";
 import { useMemo, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { getSearchResults } from "./api";
 import { Question } from "./Interfaces";
 import { QuestionText } from "./QuestionText";
 import { colors, greys } from "./victory-theme";
-import { useWindowSize } from "./use-window-size";
+import {
+  globalLastSeenQuestionsRef,
+  LastSeenQuestion,
+} from "./last-seen-questions";
 
 const styles = {
   wrapper: css`
@@ -140,6 +143,40 @@ const QuestionSelector: React.FC<Props> = ({ questions, windowSize }) => {
   });
   const history = useHistory();
 
+  const suggestionsParentDivRef = useRef<HTMLDivElement>(null);
+  const updateStuff = () => {
+    globalLastSeenQuestionsRef.current = suggestions
+      .map((s, i): LastSeenQuestion | undefined => {
+        if (suggestionsParentDivRef.current === null) {
+          return undefined;
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+        const children = suggestionsParentDivRef.current.childNodes;
+        if (i >= children.length) {
+          return undefined;
+        }
+        const child = children[i] as HTMLDivElement;
+        const rect = child.getBoundingClientRect();
+        return {
+          id: s.id,
+          offset: { x: rect.left, y: rect.top },
+        };
+      })
+      .filter((v) => v)
+      .map((v) => v!);
+  };
+
+  useLayoutEffect(() => {
+    updateStuff();
+    const onScroll = () => {
+      updateStuff();
+    };
+    document.addEventListener("scroll", onScroll);
+    return () => {
+      document.removeEventListener("scroll", onScroll);
+    };
+  });
+
   return (
     <div className={styles.wrapper}>
       <form
@@ -161,23 +198,27 @@ const QuestionSelector: React.FC<Props> = ({ questions, windowSize }) => {
           autoFocus
         />
       </form>
-      {suggestions.map((s, i) => {
-        const active = i === selectedIndex;
-        return (
-          <Link to={"/ask/" + s.id}>
-            <div
-              key={s.id}
-              className={[styles.suggestion, active && styles.activeSuggestion]
-                .filter((v) => v)
-                .join(" ")}
-              onMouseEnter={() => setSelectedIndex(i)}
-            >
-              <QuestionText text={s.text} windowSize={windowSize} />
-              {active && <div className={styles.enterHint}>Press enter</div>}
-            </div>
-          </Link>
-        );
-      })}
+      <div ref={suggestionsParentDivRef}>
+        {suggestions.map((s, i) => {
+          const active = i === selectedIndex;
+          return (
+            <Link key={s.id} to={"/ask/" + s.id}>
+              <div
+                className={[
+                  styles.suggestion,
+                  active && styles.activeSuggestion,
+                ]
+                  .filter((v) => v)
+                  .join(" ")}
+                onMouseEnter={() => setSelectedIndex(i)}
+              >
+                <QuestionText text={s.text} windowSize={windowSize} />
+                {active && <div className={styles.enterHint}>Press enter</div>}
+              </div>
+            </Link>
+          );
+        })}
+      </div>
     </div>
   );
 };
