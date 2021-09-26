@@ -33,8 +33,9 @@ const styles = {
     justify-content: center;
     margin: 30px 0;
 
-    @media (max-width: 480px) {
+    @media (max-width: 500px) {
       flex-direction: column;
+      align-items: stretch;
     }
   `,
   button: css`
@@ -46,9 +47,16 @@ const styles = {
     font-size: 18px;
     color: white;
     cursor: pointer;
-    @media (max-width: 480px) {
+
+    @media (max-width: 500px) {
       flex-direction: column;
-      width: calc(100% -20px);
+      width: calc(100% - 20px);
+      box-sizing: border-box;
+    }
+  `,
+  buttonLink: css`
+    @media (max-width: 500px) {
+      display: block;
     }
   `,
   mainBody: css`
@@ -159,7 +167,7 @@ const AnswerPage: React.FC<Props> = ({ question, windowSize }) => {
             animate={{ opacity: 1 }}
           >
             <button className={styles.button}>Share poster</button>
-            <Link to="/ask">
+            <Link to="/ask" className={styles.buttonLink}>
               <button className={styles.button}>Ask another question</button>
             </Link>
           </motion.div>
