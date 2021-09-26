@@ -1,5 +1,5 @@
 import { css } from "@emotion/css";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { askQuestion } from "./api";
 import Chart from "./Chart";
@@ -62,13 +62,10 @@ const styles = {
 };
 
 const AnswerPage: React.FC<Props> = ({ question, windowSize }) => {
-  useEffect(() => {
-    return () => {
-      globalLastSeenQuestionsRef.current = [];
-    };
-  });
-  const lastSeenQuestions = globalLastSeenQuestionsRef.current;
-  console.log("DEBUG B", lastSeenQuestions);
+  const animateFromOffsetRef = useRef(
+    globalLastSeenQuestionsRef.current.find((e) => e.id === question.id)?.offset
+  );
+  console.log("DEBUG animateFromOffsetRef", animateFromOffsetRef);
 
   const [answer, setAnswer] = useState<Answer | undefined>();
 
