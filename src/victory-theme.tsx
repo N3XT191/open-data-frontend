@@ -1,8 +1,9 @@
 import { VictoryThemeDefinition } from "victory";
+import { shuffle } from "lodash";
 
 const assign = Object.assign;
 
-export const colors = ["7231cc", "f2af05", "a2c5ac", "2f0a28", "cbbaed"].map(
+export const colors = ["e06c9f", "087ca7", "e59500", "2f0a28", "ebf5ee"].map(
 	(v) => `#${v}`
 );
 export const greys = ["#000000", "#454545", "#cccccc", "#eeeeee"];
