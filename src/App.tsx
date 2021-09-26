@@ -7,6 +7,7 @@ import { Background } from "./Background";
 import { shuffle, groupBy } from "lodash";
 import { Route, useHistory } from "react-router-dom";
 import AnswerPagePoster from "./AnswerPagePoster";
+import { useWindowSize } from "./use-window-size";
 
 function App() {
   const [questions, setQuestions] = useState<Question[]>([]);
@@ -55,19 +56,28 @@ function App() {
     };
   });
 
+  const windowSize = useWindowSize();
+
+  if (!windowSize) {
+    return null;
+  }
+
   return (
     <>
       <div style={{ height: "100%" }}>
         <Route
           exact={true}
           path="/ask/:q"
-          render={(routeProps) => (
-            <AnswerPage
-              question={questions.find(
-                (q) => q.id === +routeProps.match.params.q
-              )}
-            />
-          )}
+          render={(routeProps) => {
+            const question = questions.find(
+              (q) => q.id === +routeProps.match.params.q
+            );
+            return (
+              question && (
+                <AnswerPage question={question} windowSize={windowSize} />
+              )
+            );
+          }}
         ></Route>
         <Route
           exact={true}
@@ -81,7 +91,7 @@ function App() {
           )}
         ></Route>
         <Route exact={true} path="/ask">
-          <QuestionSelector questions={questions} />
+          <QuestionSelector questions={questions} windowSize={windowSize} />
         </Route>
       </div>
       <Background />

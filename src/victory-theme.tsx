@@ -20,6 +20,7 @@ export const sansSerif = "'Roboto', sans-serif";
 const letterSpacing = "normal";
 export const fontSize = 20;
 export const chartTitleSize = 30;
+export const questionSize = 45;
 
 export const chartBasePadding = 20;
 const axisLabelExtra = 15;

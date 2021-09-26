@@ -5,21 +5,21 @@ import { askQuestion } from "./api";
 import Chart from "./Chart";
 import { Answer, Question } from "./Interfaces";
 import { colors } from "./victory-theme";
+import { QuestionText } from "./QuestionText";
 
 interface Props {
-  question: Question | undefined;
+  question: Question;
+  windowSize: { width: number; height: number };
 }
 
 const styles = {
   question: css`
-    font-size: 45px;
-    font-weight: 500;
     margin: 50px;
     margin-top: 0;
     padding-top: 50px;
     margin-right: 150px;
+
     @media (max-width: 900px) {
-      font-size: 30px;
       margin: 20px;
       margin-top: 0;
       padding-top: 20px;
@@ -53,33 +53,7 @@ const styles = {
   `,
 };
 
-function useWindowSize() {
-  // Initialize state with undefined width/height so server and client renders match
-  // Learn more here: https://joshwcomeau.com/react/the-perils-of-rehydration/
-  const [windowSize, setWindowSize] = useState<{
-    width: number;
-    height: number;
-  }>();
-  useEffect(() => {
-    // Handler to call on window resize
-    function handleResize() {
-      // Set window width/height to state
-      setWindowSize({
-        width: window.innerWidth,
-        height: window.innerHeight,
-      });
-    }
-    // Add event listener
-    window.addEventListener("resize", handleResize);
-    // Call handler right away so state gets updated with initial window size
-    handleResize();
-    // Remove event listener on cleanup
-    return () => window.removeEventListener("resize", handleResize);
-  }, []); // Empty array ensures that effect is only run on mount
-  return windowSize;
-}
-
-const AnswerPage: React.FC<Props> = ({ question }) => {
+const AnswerPage: React.FC<Props> = ({ question, windowSize }) => {
   const [answer, setAnswer] = useState<Answer | undefined>();
 
   useEffect(() => {
@@ -93,13 +67,13 @@ const AnswerPage: React.FC<Props> = ({ question }) => {
     getData();
   }, [question]);
 
-  const windowSize = useWindowSize();
-
   return (
     <div style={{ height: "100%" }}>
-      <div className={styles.question}>{question?.text}</div>
+      <div className={styles.question}>
+        <QuestionText text={question.text} windowSize={windowSize} />
+      </div>
       <div className={styles.mainBody}>
-        {answer && windowSize ? (
+        {answer ? (
           <Chart chart={answer} windowSize={windowSize} />
         ) : (
           <div>loading...</div>

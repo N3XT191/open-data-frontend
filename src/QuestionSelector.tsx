@@ -4,7 +4,9 @@ import { useMemo, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { getSearchResults } from "./api";
 import { Question } from "./Interfaces";
+import { QuestionText } from "./QuestionText";
 import { colors, greys } from "./victory-theme";
+import { useWindowSize } from "./use-window-size";
 
 const styles = {
   wrapper: css`
@@ -54,6 +56,7 @@ const maxSuggestions = 3;
 
 interface Props {
   questions: Question[];
+  windowSize: { width: number; height: number };
 }
 
 interface SearchResult {
@@ -61,7 +64,7 @@ interface SearchResult {
   rank: number;
 }
 
-const QuestionSelector: React.FC<Props> = ({ questions }) => {
+const QuestionSelector: React.FC<Props> = ({ questions, windowSize }) => {
   const [searchValue, setSearchValue] = useState("");
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [listOffset, setListOffset] = useState(0);
@@ -169,7 +172,7 @@ const QuestionSelector: React.FC<Props> = ({ questions }) => {
                 .join(" ")}
               onMouseEnter={() => setSelectedIndex(i)}
             >
-              {s.text}
+              <QuestionText text={s.text} windowSize={windowSize} />
               {active && <div className={styles.enterHint}>Press enter</div>}
             </div>
           </Link>
@@ -178,4 +181,5 @@ const QuestionSelector: React.FC<Props> = ({ questions }) => {
     </div>
   );
 };
+
 export default QuestionSelector;
