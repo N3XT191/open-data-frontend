@@ -134,18 +134,27 @@ const AnswerPage: React.FC<Props> = ({ question, windowSize }) => {
       </div>
       <div className={styles.mainBody}>
         {answer ? (
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9, translateY: 50 }}
+            animate={{ opacity: 1, scale: 1, translateY: 0 }}
+          >
             <Chart chart={answer} width={width} height={height} />
           </motion.div>
         ) : (
           <div style={{ width, height }} />
         )}
-        <div className={styles.toolbar}>
-          <button className={styles.button}>Share poster</button>
-          <Link to="/ask">
-            <button className={styles.button}>Ask another question</button>
-          </Link>
-        </div>
+        {answer && (
+          <motion.div
+            className={styles.toolbar}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+          >
+            <button className={styles.button}>Share poster</button>
+            <Link to="/ask">
+              <button className={styles.button}>Ask another question</button>
+            </Link>
+          </motion.div>
+        )}
       </div>
     </div>
   );
