@@ -74,16 +74,26 @@ export function getChartSize(
   question: Question,
   windowSize: { width: number; height: number }
 ): { width: number; height: number } {
+  let widthPadding = 200;
+  let heightPadding = 350;
+  if (windowSize.width <= 900) {
+    widthPadding = 50;
+    heightPadding = 300;
+  }
+
   const maxWidth = 800;
   const minWidth = 300;
   let width = windowSize.width
-    ? Math.min(Math.max(windowSize.width - 200, minWidth), maxWidth)
+    ? Math.min(Math.max(windowSize.width - widthPadding, minWidth), maxWidth)
     : minWidth;
 
   const maxHeight = 800;
   const minHeight = 300;
   let height = windowSize.height
-    ? Math.min(Math.max(windowSize.height - 350, minHeight), maxHeight)
+    ? Math.min(
+        Math.max(windowSize.height - heightPadding, minHeight),
+        maxHeight
+      )
     : minHeight;
 
   const isMap = chartSettings.some(
