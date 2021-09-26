@@ -71,16 +71,50 @@ const AnswerPage: React.FC<Props> = ({ question, windowSize }) => {
 
   const [answer, setAnswer] = useState<Answer | undefined>();
 
+  const mountedAtRef = useRef(Date.now());
+
   useEffect(() => {
+    let shouldCancel = false;
     const getData = async () => {
       setAnswer(undefined);
-      if (question) {
-        const answer_data = await askQuestion(question.id);
+      const answer_data = await askQuestion(question.id);
+
+      const targetDelay = 500;
+      const delay = Math.max(
+        0,
+        Math.min(targetDelay, targetDelay - (Date.now() - mountedAtRef.current))
+      );
+      if (delay) {
+        await new Promise((resolve) =>
+          setTimeout(
+            () => resolve("HACK delay to prevent animation stutter"),
+            delay
+          )
+        );
+      }
+
+      if (!shouldCancel) {
         setAnswer(answer_data);
       }
     };
     getData();
+
+    return () => {
+      shouldCancel = true;
+    };
   }, [question]);
+
+  const maxWidth = 800;
+  const minWidth = 300;
+  const width = windowSize.width
+    ? Math.min(Math.max(windowSize.width - 200, minWidth), maxWidth)
+    : minWidth;
+
+  const maxHeight = 800;
+  const minHeight = 300;
+  const height = windowSize.height
+    ? Math.min(Math.max(windowSize.height - 350, minHeight), maxHeight)
+    : minHeight;
 
   return (
     <div style={{ height: "100%" }}>
@@ -93,9 +127,11 @@ const AnswerPage: React.FC<Props> = ({ question, windowSize }) => {
       </div>
       <div className={styles.mainBody}>
         {answer ? (
-          <Chart chart={answer} windowSize={windowSize} />
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+            <Chart chart={answer} width={width} height={height} />
+          </motion.div>
         ) : (
-          <div>loading...</div>
+          <div style={{ width, height }} />
         )}
         <div className={styles.toolbar}>
           <button className={styles.button}>Share poster</button>

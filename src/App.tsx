@@ -8,7 +8,12 @@ import { shuffle, groupBy } from "lodash";
 import { Route, useHistory } from "react-router-dom";
 import AnswerPagePoster from "./AnswerPagePoster";
 import { useWindowSize } from "./use-window-size";
-import { AnimateSharedLayout, motion, Variants } from "framer-motion";
+import {
+  AnimatePresence,
+  AnimateSharedLayout,
+  motion,
+  Variants,
+} from "framer-motion";
 
 function App() {
   const [questions, setQuestions] = useState<Question[]>([]);
@@ -63,28 +68,6 @@ function App() {
     return null;
   }
 
-  const pageVariants: Variants = {
-    initial: {
-      opacity: 0,
-    },
-    in: {
-      opacity: 1,
-    },
-    out: {
-      opacity: 0,
-    },
-  };
-  const wrapForAnimation = (children: React.ReactNode): React.ReactNode => (
-    <motion.div
-      initial="initial"
-      animate="in"
-      exit="out"
-      variants={pageVariants}
-    >
-      {children}
-    </motion.div>
-  );
-
   return (
     <>
       <AnimateSharedLayout type="crossfade">
@@ -97,9 +80,14 @@ function App() {
                 (q) => q.id === +routeProps.match.params.q
               );
               return (
-                question &&
-                wrapForAnimation(
-                  <AnswerPage question={question} windowSize={windowSize} />
+                question && (
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                  >
+                    <AnswerPage question={question} windowSize={windowSize} />
+                  </motion.div>
                 )
               );
             }}
@@ -116,9 +104,13 @@ function App() {
             )}
           ></Route>
           <Route exact={true} path="/ask">
-            {wrapForAnimation(
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1, translateY: 0 }}
+              exit={{ opacity: 0, translateY: 200 }}
+            >
               <QuestionSelector questions={questions} windowSize={windowSize} />
-            )}
+            </motion.div>
           </Route>
         </div>
       </AnimateSharedLayout>
