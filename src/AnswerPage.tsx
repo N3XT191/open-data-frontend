@@ -1,6 +1,8 @@
 import { css } from "@emotion/css";
+import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
+import { readBuilderProgram } from "typescript";
 import { askQuestion } from "./api";
 import Chart from "./Chart";
 import { Answer, Question } from "./Interfaces";
@@ -83,7 +85,11 @@ const AnswerPage: React.FC<Props> = ({ question, windowSize }) => {
   return (
     <div style={{ height: "100%" }}>
       <div className={styles.question}>
-        <QuestionText text={question.text} windowSize={windowSize} />
+        <AnimatePresence>
+          <motion.div layoutId={`question-${question.id}`}>
+            <QuestionText text={question.text} windowSize={windowSize} />
+          </motion.div>
+        </AnimatePresence>
       </div>
       <div className={styles.mainBody}>
         {answer ? (
