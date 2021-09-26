@@ -11,7 +11,7 @@ interface Props {
 
 const styles = {
 	question: css`
-		font-size: 65px;
+		font-size: 55px;
 		font-weight: 500;
 		margin: 50px;
 		margin-top: 0;
@@ -54,17 +54,16 @@ const styles = {
 		display: none;
 	`,
 	mainBody: css`
-		height: calc(100% - 520px);
+		height: calc(100% - 250px);
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
 	`,
 	botRightBox: css`
-		transfrom: rotate(90);
 		height: 180px;
 		width: 600px;
 		position: absolute;
-		bottom: 50px;
+		bottom: 450px;
 		right: 0;
 		background-color: #585759;
 		color: white;
@@ -73,6 +72,7 @@ const styles = {
 		align-items: center;
 		font-size: 40px;
 		padding: 0px;
+		display: none;
 	`,
 };
 
