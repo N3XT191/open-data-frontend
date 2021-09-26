@@ -3,7 +3,6 @@ import { groupBy, shuffle } from "lodash";
 import { useEffect, useState } from "react";
 import { Redirect, Route, Switch, useHistory } from "react-router-dom";
 import AnswerPage from "./AnswerPage";
-import AnswerPagePoster from "./AnswerPagePoster";
 import { chartSettings, getQuestions } from "./api";
 import Background from "./Background";
 import { Question } from "./Interfaces";
@@ -84,23 +83,6 @@ function App() {
 										>
 											<AnswerPage question={question} windowSize={windowSize} />
 										</motion.div>
-									)
-								);
-							}}
-						></Route>
-						<Route
-							exact={true}
-							path="/poster/:q"
-							render={(routeProps) => {
-								const question = questions.find(
-									(q) => q.id === +routeProps.match.params.q
-								);
-								return (
-									question && (
-										<AnswerPagePoster
-											question={question}
-											windowSize={windowSize}
-										/>
 									)
 								);
 							}}
