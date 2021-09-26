@@ -6,25 +6,16 @@ import { CenteredLayout } from "./CenteredLayout";
 import { ChartCard } from "./ChartCard";
 import { Answer } from "./Interfaces";
 import geoJson from "./stadtkreise.json";
+import { colors as themeColors } from "./victory-theme";
 import zurisee from "./zurisee.json";
+import { times } from "lodash";
 
 type Props = {
   chart: Answer;
   width: number;
   height: number;
 };
-const colors = [
-  "#c8dcbc",
-  "#a2c19f",
-  "#81aa7f",
-  "#639361",
-  "#437d45",
-  "#346e35",
-  "#255d26",
-  "#184e1a",
-  "#174215",
-  "#103c0c",
-];
+const colors = [themeColors[1], themeColors[2]];
 
 const Map = ({ chart, width: targetWidth, height: targetHeight }: Props) => {
   const [activeKreis, setActiveKreis] = useState(0);
@@ -53,14 +44,20 @@ const Map = ({ chart, width: targetWidth, height: targetHeight }: Props) => {
     },
   });
   const path = geoPath().projection(projection);
-  const colorScale = scaleQuantile<string>()
-    .domain(chart.data.values.map((v: any) => v.value))
-    .range(colors);
 
   const valuesWithoutCity = chart.data.values.filter(
     (v: any) => v.placeId !== 0
   );
+
   const colorBarX = width - 60;
+  const stopCount = 10;
+  const colorAxisDomain = [
+    Math.min(...valuesWithoutCity.map((v: any) => v.value)),
+    Math.max(...valuesWithoutCity.map((v: any) => v.value)),
+  ];
+  const colorScale = scaleLinear<string>()
+    .domain(colorAxisDomain)
+    .range(colors);
 
   let separateRowUnit = chart.data.unit;
   let suffixUnit = "";
@@ -121,9 +118,21 @@ const Map = ({ chart, width: targetWidth, height: targetHeight }: Props) => {
                 y2={1}
                 id="linear-gradient"
               >
-                {[...colors].reverse().map((c, i) => (
+                {times(stopCount, (i) => {
+                  const p = i / (stopCount - 1);
+                  return (
+                    <stop
+                      offset={p * 100 + "%"}
+                      stopColor={colorScale(
+                        p * colorAxisDomain[0] + (1 - p) * colorAxisDomain[1]
+                      )}
+                      key={i}
+                    />
+                  );
+                })}
+                {[...colors].map((c, i) => (
                   <stop
-                    offset={(i / c.length) * 100 + "%"}
+                    offset={(i / (colors.length - 1)) * 100 + "%"}
                     stopColor={c}
                     key={i}
                   />
@@ -140,11 +149,11 @@ const Map = ({ chart, width: targetWidth, height: targetHeight }: Props) => {
               strokeWidth={0.5}
             />
             <text x={colorBarX + 25} y={23} fill="black">
-              {Math.max(...valuesWithoutCity.map((v: any) => v.value))}
+              {colorAxisDomain[1]}
               {suffixUnit}
             </text>
             <text x={colorBarX + 25} y={108} fill="black">
-              {Math.min(...valuesWithoutCity.map((v: any) => v.value))}
+              {colorAxisDomain[0]}
               {suffixUnit}
             </text>
             {geoJson.features.map((feature: any) => {
@@ -160,7 +169,11 @@ const Map = ({ chart, width: targetWidth, height: targetHeight }: Props) => {
                   stroke="black"
                   strokeWidth={0.25}
                   d={path(feature) ?? undefined}
-                  fill={caseCount ? colorScale(caseCount) : "#ffffff00"}
+                  fill={
+                    caseCount !== undefined
+                      ? colorScale(caseCount)
+                      : "#ffffff00"
+                  }
                   onMouseEnter={() => setActiveKreis(name)}
                   onMouseLeave={() => setActiveKreis(0)}
                 />

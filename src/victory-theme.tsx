@@ -1,26 +1,19 @@
-import { VictoryThemeDefinition } from "victory";
+import { VictoryPortal, VictoryThemeDefinition } from "victory";
 
 const assign = Object.assign;
 
+export const colors = ["e89005", "ec7505", "d84a05", "f42b03", "e70e02"].map(
+  (v) => `#${v}`
+);
+export const greys = ["#000000", "#454545", "#cccccc", "#eeeeee"];
+
 // Colors
-const yellow200 = "#FFF59D";
-const deepOrange600 = "#F4511E";
-const lime300 = "#DCE775";
-const lightGreen500 = "#8BC34A";
-const teal700 = "#00796B";
-const cyan900 = "#006064";
-const colors = [
-  deepOrange600,
-  yellow200,
-  lime300,
-  lightGreen500,
-  teal700,
-  cyan900,
-];
-const blueGrey50 = "#ECEFF1";
-const blueGrey300 = "#90A4AE";
-const blueGrey700 = "#455A64";
-const grey900 = "#212121";
+
+const colorScale = [...colors];
+
+// HACK names from original victory theme
+const blueGrey300 = greys[2];
+const blueGrey700 = greys[1];
 
 // Typography
 export const sansSerif = "'Roboto', sans-serif";
@@ -43,18 +36,20 @@ export const chartLeftPaddingMeasuredExtra = axisLabelExtra + chartBasePadding;
 
 export const dotsBackgroundStyle = { fill: "url(#dots)", fillOpacity: 0.2 };
 export const dotsBackgroundDefs = (
-  <defs>
-    <pattern
-      id="dots"
-      x="0"
-      y="0"
-      width="20"
-      height="20"
-      patternUnits="userSpaceOnUse"
-    >
-      <circle fill="black" cx="10" cy="10" r="1.5"></circle>
-    </pattern>
-  </defs>
+  <>
+    <defs>
+      <pattern
+        id="dots"
+        x="0"
+        y="0"
+        width="20"
+        height="20"
+        patternUnits="userSpaceOnUse"
+      >
+        <circle fill="black" cx="10" cy="10" r="1.5"></circle>
+      </pattern>
+    </defs>
+  </>
 );
 
 // Layout
@@ -88,7 +83,7 @@ export const customTheme: VictoryThemeDefinition = {
     {
       style: {
         data: {
-          fill: grey900,
+          fill: greys[2],
         },
         labels: baseLabelStyles,
       },
@@ -117,7 +112,7 @@ export const customTheme: VictoryThemeDefinition = {
           fill: "transparent",
           size: 5,
           stroke: blueGrey300,
-          strokeWidth: 1,
+          strokeWidth: 2,
           strokeLinecap,
           strokeLinejoin,
         },
@@ -201,7 +196,7 @@ export const customTheme: VictoryThemeDefinition = {
   ),
   group: assign(
     {
-      colorScale: colors,
+      colorScale: colorScale,
     },
     baseProps
   ),
@@ -209,9 +204,7 @@ export const customTheme: VictoryThemeDefinition = {
     {
       style: {
         data: {
-          fill: blueGrey700,
-          stroke: grey900,
-          strokeWidth: 2,
+          fill: colorScale[0],
         },
         labels: baseLabelStyles,
       },
@@ -219,7 +212,7 @@ export const customTheme: VictoryThemeDefinition = {
     baseProps
   ),
   legend: {
-    colorScale: colors,
+    colorScale: colorScale,
     gutter: 10,
     orientation: "vertical",
     titleOrientation: "top",
@@ -247,12 +240,10 @@ export const customTheme: VictoryThemeDefinition = {
   ),
   pie: assign(
     {
-      colorScale: colors,
+      colorScale: colorScale,
       style: {
         data: {
           padding,
-          stroke: blueGrey50,
-          strokeWidth: 1,
         },
         labels: assign({}, baseLabelStyles, { padding: 20 }),
       },
@@ -275,15 +266,13 @@ export const customTheme: VictoryThemeDefinition = {
   ),
   stack: assign(
     {
-      colorScale: colors,
+      colorScale: colorScale,
     },
     baseProps
   ),
   tooltip: {
     style: assign({}, baseLabelStyles, { padding: 0, pointerEvents: "none" }),
     flyoutStyle: {
-      stroke: grey900,
-      strokeWidth: 1,
       fill: "#f0f0f0",
       pointerEvents: "none",
     },
@@ -291,26 +280,4 @@ export const customTheme: VictoryThemeDefinition = {
     cornerRadius: 5,
     pointerLength: 10,
   },
-  voronoi: assign(
-    {
-      style: {
-        data: {
-          fill: "transparent",
-          stroke: "transparent",
-          strokeWidth: 0,
-        },
-        labels: assign({}, baseLabelStyles, {
-          padding: 5,
-          pointerEvents: "none",
-        }),
-        flyout: {
-          stroke: grey900,
-          strokeWidth: 1,
-          fill: "#f0f0f0",
-          pointerEvents: "none",
-        },
-      },
-    },
-    baseProps
-  ),
 };

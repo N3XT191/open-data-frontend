@@ -95,7 +95,6 @@ const LineChart: React.FC<Props> = ({ chart, width, height }) => {
                 y0: e.y_low,
                 y: e.y_high,
               }))}
-              style={{ data: { fill: "#ccc" } }}
             />
           )}
           <VictoryLine data={data} />

@@ -1,5 +1,6 @@
 import { css } from "@emotion/css";
 import { CornerTriangle } from "./CornerTriangle";
+import { greys } from "./victory-theme";
 
 const styles = {
   wrapper: css`
@@ -8,7 +9,7 @@ const styles = {
     left: 0;
     width: 100vw;
     height: 100vh;
-    background: #eeeeee;
+    background: ${greys[3]};
     z-index: -10;
     user-select: none;
     pointer-events: none;

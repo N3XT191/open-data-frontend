@@ -1,4 +1,5 @@
 import { css } from "@emotion/css";
+import { colors } from "./victory-theme";
 
 interface Props {
   height: number;
@@ -21,7 +22,7 @@ const styles = {
     position: absolute;
     bottom: 0;
     left: 0;
-    background: #743fca;
+    background: ${colors[0]};
     transform-origin: bottom left;
   `,
 };
