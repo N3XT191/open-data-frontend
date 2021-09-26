@@ -1,6 +1,6 @@
 import { Answer } from "./Interfaces";
 
-const baseURL = "http://127.0.0.1:8000";
+const baseURL = process.env.API_URL || "http://127.0.0.1:8000";
 
 const getData = async (route: string) => {
   const res = await fetch(baseURL + route);
