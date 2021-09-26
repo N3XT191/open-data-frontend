@@ -8,7 +8,7 @@ import { shuffle, groupBy } from "lodash";
 import { Route, useHistory } from "react-router-dom";
 import AnswerPagePoster from "./AnswerPagePoster";
 import { useWindowSize } from "./use-window-size";
-import { AnimateSharedLayout } from "framer-motion";
+import { AnimateSharedLayout, motion, Variants } from "framer-motion";
 
 function App() {
   const [questions, setQuestions] = useState<Question[]>([]);
@@ -63,6 +63,28 @@ function App() {
     return null;
   }
 
+  const pageVariants: Variants = {
+    initial: {
+      opacity: 0,
+    },
+    in: {
+      opacity: 1,
+    },
+    out: {
+      opacity: 0,
+    },
+  };
+  const wrapForAnimation = (children: React.ReactNode): React.ReactNode => (
+    <motion.div
+      initial="initial"
+      animate="in"
+      exit="out"
+      variants={pageVariants}
+    >
+      {children}
+    </motion.div>
+  );
+
   return (
     <>
       <AnimateSharedLayout type="crossfade">
@@ -75,7 +97,8 @@ function App() {
                 (q) => q.id === +routeProps.match.params.q
               );
               return (
-                question && (
+                question &&
+                wrapForAnimation(
                   <AnswerPage question={question} windowSize={windowSize} />
                 )
               );
@@ -93,7 +116,9 @@ function App() {
             )}
           ></Route>
           <Route exact={true} path="/ask">
-            <QuestionSelector questions={questions} windowSize={windowSize} />
+            {wrapForAnimation(
+              <QuestionSelector questions={questions} windowSize={windowSize} />
+            )}
           </Route>
         </div>
       </AnimateSharedLayout>
