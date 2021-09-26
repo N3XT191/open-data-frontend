@@ -27,19 +27,25 @@ function App() {
         ev.preventDefault();
         ev.stopPropagation();
 
-        history.push(
-          "/ask/" +
-            shuffle(
-              shuffle([
-                ...Object.values(
-                  groupBy(
-                    chartSettings.filter((s) => s.chart_type === "bar"),
-                    (e) => e.chart_type
-                  )
-                ),
-              ])[0] || []
-            )[0]?.id
-        );
+        type Entry = typeof chartSettings[number];
+        type FilterCb = (e: Entry) => boolean;
+        const pickTypeThenChart = (cb: FilterCb): Entry | undefined => {
+          return shuffle(
+            shuffle([
+              ...Object.values(
+                groupBy(
+                  chartSettings.filter((s) => true),
+                  (e) => e.chart_type
+                )
+              ),
+            ])[0] || []
+          )[0];
+        };
+        const pickChart = (cb: FilterCb): Entry | undefined => {
+          return shuffle(chartSettings.filter((s) => true))[0];
+        };
+
+        history.push("/ask/" + pickChart((e) => true)?.id);
       }
     };
 
