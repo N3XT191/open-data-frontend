@@ -2,14 +2,14 @@ import { VictoryThemeDefinition } from "victory";
 
 const assign = Object.assign;
 
-export const colors = ["e06c9f", "087ca7", "e59500", "2f0a28", "ebf5ee"].map(
+export const colors = ["940a92", "1eb384", "e34f2d", "12694d", "51e1b4"].map(
   (v) => `#${v}`
 );
 export const greys = ["#000000", "#454545", "#cccccc", "#eeeeee"];
 
 // Colors
 
-const colorScale = [...colors];
+export const colorsForScale = [colors[3], colors[4]];
 
 // HACK names from original victory theme
 const blueGrey300 = greys[2];
@@ -196,7 +196,7 @@ export const customTheme: VictoryThemeDefinition = {
   ),
   group: assign(
     {
-      colorScale: colorScale,
+      colorScale: colorsForScale,
     },
     baseProps
   ),
@@ -204,7 +204,7 @@ export const customTheme: VictoryThemeDefinition = {
     {
       style: {
         data: {
-          fill: colorScale[0],
+          fill: colorsForScale[0],
         },
         labels: baseLabelStyles,
       },
@@ -212,7 +212,7 @@ export const customTheme: VictoryThemeDefinition = {
     baseProps
   ),
   legend: {
-    colorScale: colorScale,
+    colorScale: colorsForScale,
     gutter: 10,
     orientation: "vertical",
     titleOrientation: "top",
@@ -240,7 +240,7 @@ export const customTheme: VictoryThemeDefinition = {
   ),
   pie: assign(
     {
-      colorScale: colorScale,
+      colorScale: colorsForScale,
       style: {
         data: {
           padding,
@@ -266,7 +266,7 @@ export const customTheme: VictoryThemeDefinition = {
   ),
   stack: assign(
     {
-      colorScale: colorScale,
+      colorScale: colorsForScale,
     },
     baseProps
   ),

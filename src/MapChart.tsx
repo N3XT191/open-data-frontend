@@ -6,7 +6,7 @@ import { CenteredLayout } from "./CenteredLayout";
 import { ChartCard } from "./ChartCard";
 import { Answer } from "./Interfaces";
 import geoJson from "./stadtkreise.json";
-import { chartTitleSize, colors, greys } from "./victory-theme";
+import { chartTitleSize, colors, colorsForScale, greys } from "./victory-theme";
 import zurisee from "./zurisee.json";
 import { times } from "lodash";
 
@@ -15,7 +15,6 @@ type Props = {
   width: number;
   height: number;
 };
-const localColors = [colors[1], colors[2]];
 
 const Map = ({ chart, width: targetWidth, height: targetHeight }: Props) => {
   const [activeKreis, setActiveKreis] = useState(0);
@@ -57,7 +56,7 @@ const Map = ({ chart, width: targetWidth, height: targetHeight }: Props) => {
   ];
   const colorScale = scaleLinear<string>()
     .domain(colorAxisDomain)
-    .range(localColors);
+    .range(colorsForScale);
 
   let separateRowUnit = chart.data.unit;
   let suffixUnit = "";
@@ -132,13 +131,6 @@ const Map = ({ chart, width: targetWidth, height: targetHeight }: Props) => {
                     />
                   );
                 })}
-                {[...localColors].map((c, i) => (
-                  <stop
-                    offset={(i / (localColors.length - 1)) * 100 + "%"}
-                    stopColor={c}
-                    key={i}
-                  />
-                ))}
               </linearGradient>
             </defs>
             <rect

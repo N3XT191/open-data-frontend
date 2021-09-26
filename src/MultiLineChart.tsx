@@ -23,7 +23,7 @@ interface Props {
   width: number;
   height: number;
 }
-const colors = globalColors.slice(1);
+const colors = [globalColors[1], globalColors[0], globalColors[2]];
 const MultiLineChart: React.FC<Props> = ({ chart, width, height }) => {
   const keys = Object.keys(chart.data[0]);
   const monthTicks = {
