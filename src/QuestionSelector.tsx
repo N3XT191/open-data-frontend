@@ -12,59 +12,60 @@ import {
 } from "./last-seen-questions";
 
 const styles = {
-  wrapper: css`
-    max-width: 800px;
-    margin: 0 auto;
-    margin-top: calc((100vh - 350px) / 2);
-  `,
-  questionInput: css`
-    border: none;
-    padding: 0 10px;
-    margin: 0;
-    margin-bottom: 30px;
-    width: 240px;
-    background: none;
-    font-size: 45px;
-    font-weight: 500;
-    width: 100%;
-    box-sizing: border-box;
-  `,
-  suggestion: css`
-    position: relative;
-    font-size: 45px;
-    width: 100%;
-    padding: 5px 20px;
-    box-sizing: border-box;
-    background: ${greys[3]};
-  `,
-  activeSuggestion: css`
-    color: white;
-    background: ${colors[0]} !important;
-  `,
-  enterHint: css`
-    display: flex;
-    align-items: center;
-    position: absolute;
-    top: 0;
-    left: calc(100% + 10px);
-    height: 100%;
-    background: ${colors[0]};
-    font-size: 20px;
-    text-align: center;
-    padding: 0 10px;
-  `,
+	wrapper: css`
+		max-width: 800px;
+		margin: 0 auto;
+		margin-top: calc((100vh - 750px) / 2);
+		max-height: 100%;
+	`,
+	questionInput: css`
+		border: none;
+		padding: 0 10px;
+		margin: 0;
+		margin-bottom: 30px;
+		width: 240px;
+		background: none;
+		font-size: 45px;
+		font-weight: 500;
+		width: 100%;
+		box-sizing: border-box;
+	`,
+	suggestion: css`
+		position: relative;
+		font-size: 45px;
+		width: 100%;
+		padding: 5px 20px;
+		box-sizing: border-box;
+		background: ${greys[3]};
+	`,
+	activeSuggestion: css`
+		color: white;
+		background: ${colors[0]} !important;
+	`,
+	enterHint: css`
+		display: flex;
+		align-items: center;
+		position: absolute;
+		top: 0;
+		left: calc(100% + 10px);
+		height: 100%;
+		background: ${colors[0]};
+		font-size: 20px;
+		text-align: center;
+		padding: 0 10px;
+	`,
 };
 
 const maxSuggestions = 3;
 
 interface Props {
-  questions: Question[];
-  windowSize: { width: number; height: number };
+	questions: Question[];
+	windowSize: { width: number; height: number };
 }
 
 interface SearchResult {
-  id: number;
-  rank: number;
+	id: number;
+	rank: number;
 }
 
 const QuestionSelector: React.FC<Props> = ({ questions, windowSize }) => {
