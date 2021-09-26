@@ -26,7 +26,7 @@ export const QuestionText = ({ text, windowSize }: Props) => {
     getExpectedWidthForQuestion(windowSize.width),
     getExpectedWidthForAnswer(windowSize.width)
   );
-  const fontSize = windowSize.width <= 900 ? chartTitleSize : questionSize;
+  const fontSize = windowSize.width <= 900 ? 30 : questionSize;
   return (
     <div
       style={{
