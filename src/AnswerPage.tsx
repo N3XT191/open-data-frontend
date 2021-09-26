@@ -2,8 +2,7 @@ import { css } from "@emotion/css";
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { readBuilderProgram } from "typescript";
-import { askQuestion } from "./api";
+import { askQuestion, chartSettings } from "./api";
 import Chart from "./Chart";
 import { Answer, Question } from "./Interfaces";
 import { globalLastSeenQuestionsRef } from "./last-seen-questions";
@@ -106,15 +105,23 @@ const AnswerPage: React.FC<Props> = ({ question, windowSize }) => {
 
   const maxWidth = 800;
   const minWidth = 300;
-  const width = windowSize.width
+  let width = windowSize.width
     ? Math.min(Math.max(windowSize.width - 200, minWidth), maxWidth)
     : minWidth;
 
   const maxHeight = 800;
   const minHeight = 300;
-  const height = windowSize.height
+  let height = windowSize.height
     ? Math.min(Math.max(windowSize.height - 350, minHeight), maxHeight)
     : minHeight;
+
+  const isMap = chartSettings.some(
+    (s) => s.id === question.id && s.chart_type === "map"
+  );
+  if (isMap) {
+    width *= 0.8;
+    height *= 0.8;
+  }
 
   return (
     <div style={{ height: "100%" }}>
