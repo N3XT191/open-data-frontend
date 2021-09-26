@@ -13,15 +13,25 @@ import {
 import { motion } from "framer-motion";
 
 const styles = {
-  appName: css`
-    font-size: 60px;
-    text-align: center;
-    margin-bottom: 60px;
-  `,
   wrapper: css`
     max-width: 800px;
     margin: 0 auto;
     margin-top: calc((100vh - 600px) / 2);
+
+    @media (max-width: 900px) {
+      margin: 0;
+      padding: 5px;
+    }
+  `,
+  appName: css`
+    font-size: 60px;
+    text-align: center;
+    margin-bottom: 60px;
+
+    @media (max-width: 500px) {
+      font-size: 40px;
+      margin-bottom: 20px;
+    }
   `,
   questionInput: css`
     border: none;
@@ -34,6 +44,11 @@ const styles = {
     font-weight: 500;
     width: 100%;
     box-sizing: border-box;
+
+    @media (max-width: 900px) {
+      font-size: 30px;
+      margin-bottom: 20px;
+    }
   `,
   suggestion: css`
     position: relative;
@@ -216,7 +231,9 @@ const QuestionSelector: React.FC<Props> = ({ questions, windowSize }) => {
                 onMouseEnter={() => setSelectedIndex(i)}
               >
                 <QuestionText text={s.text} windowSize={windowSize} />
-                {active && <div className={styles.enterHint}>Press enter</div>}
+                {active && windowSize.width >= 1100 && (
+                  <div className={styles.enterHint}>Press enter</div>
+                )}
               </motion.div>
             </Link>
           );

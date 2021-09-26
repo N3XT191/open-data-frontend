@@ -7,8 +7,11 @@ interface Props {
 
 function getExpectedWidthForQuestion(windowWidth: number): number {
   const small = windowWidth <= 900;
+  if (small) {
+    return windowWidth - 20;
+  }
   const paddingRight = 150;
-  const expectedMargin = small ? 20 : 50;
+  const expectedMargin = 50;
   return windowWidth - paddingRight - expectedMargin;
 }
 
