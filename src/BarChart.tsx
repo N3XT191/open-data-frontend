@@ -85,9 +85,6 @@ const BarChart: React.FC<Props> = ({ chart, width, height }) => {
           <VictoryBar
             height={300}
             data={chart.data}
-            style={{
-              data: { fill: "#c43a31" },
-            }}
             categories={{ x: chart.data.map((v: any) => v.x) }}
             horizontal={true}
           ></VictoryBar>

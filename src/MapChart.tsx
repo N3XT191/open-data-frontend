@@ -6,7 +6,7 @@ import { CenteredLayout } from "./CenteredLayout";
 import { ChartCard } from "./ChartCard";
 import { Answer } from "./Interfaces";
 import geoJson from "./stadtkreise.json";
-import { colors as themeColors } from "./victory-theme";
+import { chartTitleSize, colors, greys } from "./victory-theme";
 import zurisee from "./zurisee.json";
 import { times } from "lodash";
 
@@ -15,7 +15,7 @@ type Props = {
   width: number;
   height: number;
 };
-const colors = [themeColors[1], themeColors[2]];
+const localColors = [colors[1], colors[2]];
 
 const Map = ({ chart, width: targetWidth, height: targetHeight }: Props) => {
   const [activeKreis, setActiveKreis] = useState(0);
@@ -57,7 +57,7 @@ const Map = ({ chart, width: targetWidth, height: targetHeight }: Props) => {
   ];
   const colorScale = scaleLinear<string>()
     .domain(colorAxisDomain)
-    .range(colors);
+    .range(localColors);
 
   let separateRowUnit = chart.data.unit;
   let suffixUnit = "";
@@ -77,15 +77,17 @@ const Map = ({ chart, width: targetWidth, height: targetHeight }: Props) => {
           textAlign: "center",
         }}
       >
-        <div style={{ fontSize: 30 }}>
+        <div style={{ fontSize: chartTitleSize, color: greys[1] }}>
           {activeKreis ? "Kreis " + activeKreis : "All of Zurich"}
         </div>
-        <div style={{ fontSize: 60 }}>
+        <div style={{ fontSize: 60, color: colors[1] }}>
           {chart.data.values.find((v: any) => v.placeId === activeKreis)?.value}
           {suffixUnit}
         </div>
         {separateRowUnit && (
-          <div style={{ fontSize: 30 }}>{separateRowUnit}</div>
+          <div style={{ fontSize: chartTitleSize, color: greys[1] }}>
+            {separateRowUnit}
+          </div>
         )}
       </ChartCard>
       <ChartCard style={{ padding: 30 }}>
@@ -130,9 +132,9 @@ const Map = ({ chart, width: targetWidth, height: targetHeight }: Props) => {
                     />
                   );
                 })}
-                {[...colors].map((c, i) => (
+                {[...localColors].map((c, i) => (
                   <stop
-                    offset={(i / (colors.length - 1)) * 100 + "%"}
+                    offset={(i / (localColors.length - 1)) * 100 + "%"}
                     stopColor={c}
                     key={i}
                   />

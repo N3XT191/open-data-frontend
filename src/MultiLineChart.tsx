@@ -11,6 +11,7 @@ import { Answer } from "./Interfaces";
 import {
   chartTitleSize,
   chartTitleY,
+  colors as globalColors,
   customTheme,
   defaultChartPadding,
   dotsBackgroundDefs,
@@ -22,18 +23,7 @@ interface Props {
   width: number;
   height: number;
 }
-const colors = [
-  "#2965CC",
-  "#29A634",
-  "#D99E0B",
-  "#D13913",
-  "#8F398F",
-  "#00B3A4",
-  "#DB2C6F",
-  "#9BBF30",
-  "#96622D",
-  "#7157D9",
-];
+const colors = globalColors.slice(1);
 const MultiLineChart: React.FC<Props> = ({ chart, width, height }) => {
   const keys = Object.keys(chart.data[0]);
   const monthTicks = {
@@ -96,7 +86,7 @@ const MultiLineChart: React.FC<Props> = ({ chart, width, height }) => {
               data={chart.data.map((point: any) => {
                 return { x: point.day_of_year, y: point[key] };
               })}
-              style={{ data: { stroke: colors[i], strokeWidth: 1.5 } }}
+              style={{ data: { stroke: colors[i] } }}
             />
           ))}
         </VictoryChart>

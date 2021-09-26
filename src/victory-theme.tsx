@@ -1,8 +1,8 @@
-import { VictoryPortal, VictoryThemeDefinition } from "victory";
+import { VictoryThemeDefinition } from "victory";
 
 const assign = Object.assign;
 
-export const colors = ["e89005", "ec7505", "d84a05", "f42b03", "e70e02"].map(
+export const colors = ["54428e", "8963ba", "afe3c0", "90c290", "688b58"].map(
   (v) => `#${v}`
 );
 export const greys = ["#000000", "#454545", "#cccccc", "#eeeeee"];
@@ -136,7 +136,7 @@ export const customTheme: VictoryThemeDefinition = {
     {
       style: {
         data: {
-          fill: blueGrey700,
+          fill: colors[1],
           padding,
           strokeWidth: 0,
         },
@@ -230,8 +230,8 @@ export const customTheme: VictoryThemeDefinition = {
         data: {
           fill: "transparent",
           opacity: 1,
-          stroke: blueGrey700,
-          strokeWidth: 2,
+          stroke: colors[1],
+          strokeWidth: 5,
         },
         labels: baseLabelStyles,
       },

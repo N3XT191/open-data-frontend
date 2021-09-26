@@ -45,7 +45,7 @@ function App() {
           return shuffle(chartSettings.filter((s) => true))[0];
         };
 
-        history.push("/ask/" + pickChart((e) => true)?.id);
+        history.push("/ask/" + pickTypeThenChart((e) => true)?.id);
       }
     };
 
