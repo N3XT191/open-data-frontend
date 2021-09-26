@@ -60,7 +60,7 @@ const BarChart: React.FC<Props> = ({ chart, width, height }) => {
               : chartTopPaddingNoTitle,
             bottom: chart.hide_x_axis
               ? chartBottomPaddingNoAxis
-              : defaultChartPadding.top,
+              : defaultChartPadding.bottom,
           }}
         >
           {dotsBackgroundDefs}

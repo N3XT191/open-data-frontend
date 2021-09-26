@@ -26,11 +26,20 @@ const grey900 = "#212121";
 export const sansSerif = "'Roboto', sans-serif";
 const letterSpacing = "normal";
 export const fontSize = 20;
+export const chartTitleSize = 30;
 
-export const defaultChartPadding = { top: 50, right: 10, bottom: 35, left: 10 };
-export const chartTopPaddingNoTitle = 10;
-export const chartBottomPaddingNoAxis = 10;
-export const chartLeftPaddingMeasuredExtra = 25;
+export const chartBasePadding = 20;
+const axisLabelExtra = 15;
+export const chartTitleY = chartTitleSize / 2 + chartBasePadding;
+export const defaultChartPadding = {
+  top: chartTitleY + chartTitleSize / 2 + chartBasePadding,
+  right: chartBasePadding,
+  bottom: fontSize + axisLabelExtra + chartBasePadding,
+  left: chartBasePadding,
+};
+export const chartTopPaddingNoTitle = chartBasePadding;
+export const chartBottomPaddingNoAxis = chartBasePadding;
+export const chartLeftPaddingMeasuredExtra = axisLabelExtra + chartBasePadding;
 
 export const dotsBackgroundStyle = { fill: "url(#dots)", fillOpacity: 0.2 };
 export const dotsBackgroundDefs = (
