@@ -69,6 +69,7 @@ interface SearchResult {
 }
 
 const QuestionSelector: React.FC<Props> = ({ questions, windowSize }) => {
+<<<<<<< HEAD
   const [searchValue, setSearchValue] = useState("");
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [listOffset, setListOffset] = useState(0);
@@ -222,6 +223,135 @@ const QuestionSelector: React.FC<Props> = ({ questions, windowSize }) => {
       </div>
     </div>
   );
+=======
+	const [searchValue, setSearchValue] = useState("");
+	const [selectedIndex, setSelectedIndex] = useState(0);
+	const [listOffset, setListOffset] = useState(0);
+	const [searchResults, setSearchResults] = useState<SearchResult[]>();
+
+	const hasSearchValue = !!searchValue.trim();
+
+	useEffect(() => {
+		if (!hasSearchValue) {
+			setSearchResults([]);
+		}
+
+		let shouldIgnore = false;
+
+		getSearchResults(searchValue)
+			.then((res) => {
+				if (!shouldIgnore) {
+					setSearchResults(res);
+				}
+			})
+			.catch((err) => console.error("search failed", err));
+
+		return () => {
+			shouldIgnore = true;
+		};
+	}, [hasSearchValue, searchValue]);
+
+	const allSuggestions = useMemo(() => {
+		if (!hasSearchValue) {
+			return questions;
+		}
+		if (hasSearchValue && !searchResults) {
+			return [];
+		}
+		return (searchResults || [])
+			.map((r) => questions.find((q) => q.id === r.id))
+			.filter((v) => v)
+			.map((v) => v!);
+	}, [hasSearchValue, searchResults, questions]);
+
+	const suggestions = useMemo(
+		() => allSuggestions.slice(listOffset, maxSuggestions + listOffset),
+		[listOffset, allSuggestions]
+	);
+
+	useEffect(() => {
+		setSelectedIndex(0);
+		setListOffset(0);
+	}, [allSuggestions]);
+
+	useEffect(() => {
+		const onKeyDown = (ev: KeyboardEvent) => {
+			if (ev.key === "ArrowUp" || ev.key === "ArrowDown") {
+				ev.preventDefault();
+				ev.stopPropagation();
+				const offset = ev.key === "ArrowUp" ? -1 : 1;
+				if (selectedIndex === 2 && ev.key === "ArrowDown") {
+					setListOffset((i) =>
+						Math.min(i + 1, allSuggestions.length - maxSuggestions + 1)
+					);
+				} else if (selectedIndex === 0 && ev.key === "ArrowUp") {
+					setListOffset((i) => Math.max(i - 1, 0));
+				} else {
+					setSelectedIndex((i) => i + offset);
+				}
+			}
+		};
+
+		document.addEventListener("keydown", onKeyDown);
+		return () => {
+			document.removeEventListener("keydown", onKeyDown);
+		};
+	});
+	const history = useHistory();
+
+	return (
+		<div className={styles.wrapper}>
+			<div
+				style={{
+					fontSize: 70,
+					width: "100%",
+					display: "flex",
+					justifyContent: "center",
+					alignItems: "center",
+					height: 200,
+				}}
+			>
+				AskOpenData
+			</div>
+			<form
+				onSubmit={(ev) => {
+					ev.preventDefault();
+					if (suggestions.length) {
+						const s = suggestions[selectedIndex];
+						if (s) {
+							history.push("/ask/" + s.id);
+						}
+					}
+				}}
+			>
+				<input
+					className={styles.questionInput}
+					placeholder="Type your question..."
+					value={searchValue}
+					onChange={(ev) => setSearchValue(ev.target.value)}
+					autoFocus
+				/>
+			</form>
+			{suggestions.map((s, i) => {
+				const active = i === selectedIndex;
+				return (
+					<Link to={"/ask/" + s.id}>
+						<div
+							key={s.id}
+							className={[styles.suggestion, active && styles.activeSuggestion]
+								.filter((v) => v)
+								.join(" ")}
+							onMouseEnter={() => setSelectedIndex(i)}
+						>
+							<QuestionText text={s.text} windowSize={windowSize} />
+							{active && <div className={styles.enterHint}>Press enter</div>}
+						</div>
+					</Link>
+				);
+			})}
+		</div>
+	);
+>>>>>>> db5805f (stuff?)
 };
 
 export default QuestionSelector;
