@@ -30,7 +30,7 @@ export const fontSize = 20;
 export const defaultChartPadding = { top: 50, right: 10, bottom: 35, left: 10 };
 export const chartTopPaddingNoTitle = 10;
 export const chartBottomPaddingNoAxis = 10;
-export const chartLeftPaddingMeasuredExtra = 20;
+export const chartLeftPaddingMeasuredExtra = 25;
 
 export const dotsBackgroundStyle = { fill: "url(#dots)", fillOpacity: 0.2 };
 export const dotsBackgroundDefs = (

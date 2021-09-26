@@ -9,78 +9,78 @@ import { Route, useHistory } from "react-router-dom";
 import AnswerPagePoster from "./AnswerPagePoster";
 
 function App() {
-	const [questions, setQuestions] = useState<Question[]>([]);
+  const [questions, setQuestions] = useState<Question[]>([]);
 
-	const history = useHistory();
+  const history = useHistory();
 
-	useEffect(() => {
-		const getData = async () => {
-			const data = await getQuestions();
-			setQuestions(data);
-		};
-		getData();
-	}, []);
+  useEffect(() => {
+    const getData = async () => {
+      const data = await getQuestions();
+      setQuestions(data);
+    };
+    getData();
+  }, []);
 
-	useEffect(() => {
-		const onKeyDown = (ev: KeyboardEvent) => {
-			if (ev.key === "r" && (ev.altKey || ev.ctrlKey)) {
-				ev.preventDefault();
-				ev.stopPropagation();
+  useEffect(() => {
+    const onKeyDown = (ev: KeyboardEvent) => {
+      if (ev.key === "r" && (ev.altKey || ev.ctrlKey)) {
+        ev.preventDefault();
+        ev.stopPropagation();
 
-				history.push(
-					"/ask/" +
-						shuffle(
-							shuffle([
-								...Object.values(
-									groupBy(
-										chartSettings.filter((s) => s.id !== 0),
-										(e) => e.chart_type
-									)
-								),
-							])[0] || []
-						)[0]?.id
-				);
-			}
-		};
+        history.push(
+          "/ask/" +
+            shuffle(
+              shuffle([
+                ...Object.values(
+                  groupBy(
+                    chartSettings.filter((s) => s.chart_type === "bar"),
+                    (e) => e.chart_type
+                  )
+                ),
+              ])[0] || []
+            )[0]?.id
+        );
+      }
+    };
 
-		document.addEventListener("keydown", onKeyDown);
-		return () => {
-			document.removeEventListener("keydown", onKeyDown);
-		};
-	});
+    document.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.removeEventListener("keydown", onKeyDown);
+    };
+  });
 
-	return (
-		<>
-			<div style={{ height: "100%" }}>
-				<Route
-					exact={true}
-					path="/ask/:q"
-					render={(routeProps) => (
-						<AnswerPage
-							question={questions.find(
-								(q) => q.id === +routeProps.match.params.q
-							)}
-						/>
-					)}
-				></Route>
-				<Route
-					exact={true}
-					path="/poster/:q"
-					render={(routeProps) => (
-						<AnswerPagePoster
-							question={questions.find(
-								(q) => q.id === +routeProps.match.params.q
-							)}
-						/>
-					)}
-				></Route>
-				<Route exact={true} path="/ask">
-					<QuestionSelector questions={questions} />
-				</Route>
-			</div>
-			<Background />
-		</>
-	);
+  return (
+    <>
+      <div style={{ height: "100%" }}>
+        <Route
+          exact={true}
+          path="/ask/:q"
+          render={(routeProps) => (
+            <AnswerPage
+              question={questions.find(
+                (q) => q.id === +routeProps.match.params.q
+              )}
+            />
+          )}
+        ></Route>
+        <Route
+          exact={true}
+          path="/poster/:q"
+          render={(routeProps) => (
+            <AnswerPagePoster
+              question={questions.find(
+                (q) => q.id === +routeProps.match.params.q
+              )}
+            />
+          )}
+        ></Route>
+        <Route exact={true} path="/ask">
+          <QuestionSelector questions={questions} />
+        </Route>
+      </div>
+      <Background />
+    </>
+  );
 }
 
 export default App;
