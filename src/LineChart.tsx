@@ -21,7 +21,6 @@ import {
   chartTitleSize,
   chartTitleY,
 } from "./victory-theme";
-import { last, findLast } from "lodash";
 
 interface Props {
   chart: Answer;

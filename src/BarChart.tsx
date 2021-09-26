@@ -13,6 +13,8 @@ import { getLabelWidth, tickFormat } from "./measured-ticks";
 import {
   chartBottomPaddingNoAxis,
   chartLeftPaddingMeasuredExtra,
+  chartTitleSize,
+  chartTitleY,
   chartTopPaddingNoTitle,
   customTheme,
   defaultChartPadding,
@@ -75,10 +77,10 @@ const BarChart: React.FC<Props> = ({ chart, width, height }) => {
           />
           <VictoryLabel
             x={width / 2}
-            y={25}
+            y={chartTitleY}
             textAnchor="middle"
             text={chart.graph_label}
-            style={{ fontSize: 25 }}
+            style={{ fontSize: chartTitleSize }}
           />
           <VictoryBar
             height={300}

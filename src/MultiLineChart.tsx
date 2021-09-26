@@ -1,4 +1,3 @@
-import { Answer } from "./Interfaces";
 import {
   VictoryAxis,
   VictoryChart,
@@ -8,11 +7,14 @@ import {
 } from "victory";
 import { CenteredLayout } from "./CenteredLayout";
 import { ChartCard } from "./ChartCard";
+import { Answer } from "./Interfaces";
 import {
   chartTitleSize,
   chartTitleY,
-  chartTopPaddingNoTitle,
+  customTheme,
   defaultChartPadding,
+  dotsBackgroundDefs,
+  dotsBackgroundStyle,
 } from "./victory-theme";
 
 interface Props {
@@ -49,21 +51,21 @@ const MultiLineChart: React.FC<Props> = ({ chart, width, height }) => {
         <VictoryChart
           width={width}
           height={height}
+          theme={customTheme}
+          style={{ background: dotsBackgroundStyle }}
           padding={{
             ...defaultChartPadding,
-            top:
-              50 +
-              (chart.graph_label?.trim().length
-                ? defaultChartPadding.top
-                : chartTopPaddingNoTitle),
+            top: defaultChartPadding.top + 60,
           }}
         >
+          {dotsBackgroundDefs}
+
           <VictoryLabel
             x={width / 2}
             y={chartTitleY}
             textAnchor="middle"
             text={chart.graph_label}
-            style={{ fontSize: chartTitleSize, paddingBottom: 50 }}
+            style={{ fontSize: chartTitleSize }}
           />
 
           <VictoryAxis
@@ -80,15 +82,10 @@ const MultiLineChart: React.FC<Props> = ({ chart, width, height }) => {
           />
 
           <VictoryLegend
-            y={50}
-            x={width / 2 - 110}
-            centerTitle
+            y={defaultChartPadding.top - 5}
+            x={width / 2 - 120}
             orientation="horizontal"
-            gutter={30}
-            style={{
-              border: { stroke: "black" },
-              labels: { fontSize: 20 },
-            }}
+            gutter={40}
             data={keys.slice(1).map((key, i) => {
               return { name: key, symbol: { fill: colors[i] } };
             })}
