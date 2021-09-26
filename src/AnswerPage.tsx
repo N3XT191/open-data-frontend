@@ -10,8 +10,8 @@ import { QuestionText } from "./QuestionText";
 import { colors } from "./victory-theme";
 
 interface Props {
-  question: Question;
-  windowSize: { width: number; height: number };
+	question: Question;
+	windowSize: { width: number; height: number };
 }
 
 const styles = {
@@ -71,8 +71,8 @@ const styles = {
 };
 
 export function getChartSize(
-  question: Question,
-  windowSize: { width: number; height: number }
+	question: Question,
+	windowSize: { width: number; height: number }
 ): { width: number; height: number } {
   let widthPadding = 200;
   let heightPadding = 350;
