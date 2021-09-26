@@ -50,7 +50,7 @@ const BarChart: React.FC<Props> = ({ chart, width, height }) => {
         <VictoryChart
           width={width}
           height={height}
-          domainPadding={25}
+          domainPadding={{ x: 25 }}
           theme={customTheme}
           padding={{
             ...defaultChartPadding,

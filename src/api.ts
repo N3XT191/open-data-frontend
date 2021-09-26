@@ -137,24 +137,25 @@ for (let i = 59; i <= 59; i++) {
     chart_type: "line",
     x_axis_time: true,
     graph_label: "Power [kW] consumption (weekly average)",
+    domain_padding: { y: 25 },
   });
 }
 chartSettings.push({
   id: 60,
   chart_type: "line",
-  graph_label: "Power [kW] consumption (hourly average) over a day",
+  graph_label: "Average power [kW] consumption by hour of day",
   x_axis_hours: true,
 });
 chartSettings.push({
   id: 61,
-  chart_type: "line",
-  graph_label: "Power [kW] consumption (daily average) over a week",
+  chart_type: "bar",
+  graph_label: "Average power [kW] consumption by weekday",
 });
 
 chartSettings.push({
   id: 62,
   chart_type: "line",
-  graph_label: "Power [kW] consumption (daily average)",
+  graph_label: "Average power [kW] consumption per day of year",
 });
 for (let i = 63; i <= 68; i++) {
   chartSettings.push({

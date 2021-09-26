@@ -61,6 +61,7 @@ const LineChart: React.FC<Props> = ({ chart, width, height }) => {
         <VictoryChart
           width={width}
           height={height}
+          domainPadding={chart.domain_padding}
           scale={{ x: chart.x_axis_time ? "time" : undefined }}
           theme={customTheme}
           style={{ background: dotsBackgroundStyle }}
