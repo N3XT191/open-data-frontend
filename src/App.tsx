@@ -95,13 +95,19 @@ function App() {
           <Route
             exact={true}
             path="/poster/:q"
-            render={(routeProps) => (
-              <AnswerPagePoster
-                question={questions.find(
-                  (q) => q.id === +routeProps.match.params.q
-                )}
-              />
-            )}
+            render={(routeProps) => {
+              const question = questions.find(
+                (q) => q.id === +routeProps.match.params.q
+              );
+              return (
+                question && (
+                  <AnswerPagePoster
+                    question={question}
+                    windowSize={windowSize}
+                  />
+                )
+              );
+            }}
           ></Route>
           <Route exact={true} path="/ask">
             <motion.div

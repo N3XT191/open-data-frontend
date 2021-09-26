@@ -62,6 +62,33 @@ const styles = {
   `,
 };
 
+export function getChartSize(
+  question: Question,
+  windowSize: { width: number; height: number }
+): { width: number; height: number } {
+  const maxWidth = 800;
+  const minWidth = 300;
+  let width = windowSize.width
+    ? Math.min(Math.max(windowSize.width - 200, minWidth), maxWidth)
+    : minWidth;
+
+  const maxHeight = 800;
+  const minHeight = 300;
+  let height = windowSize.height
+    ? Math.min(Math.max(windowSize.height - 350, minHeight), maxHeight)
+    : minHeight;
+
+  const isMap = chartSettings.some(
+    (s) => s.id === question.id && s.chart_type === "map"
+  );
+  if (isMap) {
+    width *= 0.8;
+    height *= 0.8;
+  }
+
+  return { width, height };
+}
+
 const AnswerPage: React.FC<Props> = ({ question, windowSize }) => {
   const animateFromOffsetRef = useRef(
     globalLastSeenQuestionsRef.current.find((e) => e.id === question.id)?.offset
@@ -103,25 +130,7 @@ const AnswerPage: React.FC<Props> = ({ question, windowSize }) => {
     };
   }, [question]);
 
-  const maxWidth = 800;
-  const minWidth = 300;
-  let width = windowSize.width
-    ? Math.min(Math.max(windowSize.width - 200, minWidth), maxWidth)
-    : minWidth;
-
-  const maxHeight = 800;
-  const minHeight = 300;
-  let height = windowSize.height
-    ? Math.min(Math.max(windowSize.height - 350, minHeight), maxHeight)
-    : minHeight;
-
-  const isMap = chartSettings.some(
-    (s) => s.id === question.id && s.chart_type === "map"
-  );
-  if (isMap) {
-    width *= 0.8;
-    height *= 0.8;
-  }
+  const { width, height } = getChartSize(question, windowSize);
 
   return (
     <div style={{ height: "100%" }}>
