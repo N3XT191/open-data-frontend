@@ -66,8 +66,9 @@ export class Dictionary {
 
   async checkSupport(): Promise<boolean> {
     try {
-      await this.loadChunkIfMissing(Dictionary.chunkNameFromWord("walrus"));
-      return true;
+      const testWord = "dog";
+      await this.loadChunkIfMissing(Dictionary.chunkNameFromWord(testWord));
+      return this.hasWord(testWord);
     } catch (err) {
       return false;
     }
