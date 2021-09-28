@@ -200,7 +200,7 @@ export const askQuestion = async (question_id: number) => {
   return {
     ...settings,
     id: question_id,
-    data: await sendData("/answer", { id: question_id }),
+    data: await getData(`/answer/${question_id}`),
   } as Answer;
 };
 
