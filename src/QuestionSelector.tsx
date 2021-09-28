@@ -1,16 +1,15 @@
 import { css } from "@emotion/css";
-import { useEffect, useLayoutEffect, useRef } from "react";
-import { useMemo, useState } from "react";
+import { motion } from "framer-motion";
+import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
-import { getSearchResults } from "./api";
 import { Question } from "./Interfaces";
-import { QuestionText } from "./QuestionText";
-import { colors, greys } from "./victory-theme";
 import {
   globalLastSeenQuestionsRef,
   LastSeenQuestion,
 } from "./last-seen-questions";
-import { motion } from "framer-motion";
+import { QuestionText } from "./QuestionText";
+import { useSearch } from "./search";
+import { colors, greys } from "./victory-theme";
 
 const styles = {
   wrapper: css`
@@ -78,38 +77,14 @@ interface Props {
   windowSize: { width: number; height: number };
 }
 
-interface SearchResult {
-  id: number;
-  rank: number;
-}
-
 const QuestionSelector: React.FC<Props> = ({ questions, windowSize }) => {
   const [searchValue, setSearchValue] = useState("");
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [listOffset, setListOffset] = useState(0);
-  const [searchResults, setSearchResults] = useState<SearchResult[]>();
+
+  const searchResults = useSearch(searchValue, questions);
 
   const hasSearchValue = !!searchValue.trim();
-
-  useEffect(() => {
-    if (!hasSearchValue) {
-      setSearchResults([]);
-    }
-
-    let shouldIgnore = false;
-
-    getSearchResults(searchValue)
-      .then((res) => {
-        if (!shouldIgnore) {
-          setSearchResults(res);
-        }
-      })
-      .catch((err) => console.error("search failed", err));
-
-    return () => {
-      shouldIgnore = true;
-    };
-  }, [hasSearchValue, searchValue]);
 
   const allSuggestions = useMemo(() => {
     if (!hasSearchValue) {
