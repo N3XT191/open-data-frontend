@@ -44,9 +44,6 @@ function App() {
             ])[0] || []
           )[0];
         };
-        const pickChart = (cb: FilterCb): Entry | undefined => {
-          return shuffle(chartSettings.filter((s) => true))[0];
-        };
 
         history.push("/ask/" + pickTypeThenChart((e) => true)?.id);
       }
