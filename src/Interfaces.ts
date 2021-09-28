@@ -3,6 +3,7 @@ import { DomainPaddingPropType } from "victory-core";
 export interface Question {
   id: number;
   text: string;
+  usefulWordCount: number;
 }
 
 export interface Answer {

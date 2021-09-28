@@ -1,4 +1,4 @@
-import { sortedIndexOf } from "lodash";
+import { sortBy, sortedIndexOf, sum } from "lodash";
 import { useState, useEffect, useRef, useMemo } from "react";
 import { baseURL, getSearchResults } from "./api";
 import { Question } from "./Interfaces";
@@ -20,7 +20,10 @@ const stopWords = new Set(
     .map((w) => stemWord(w, undefined))
 );
 
-function roughTokenize(s: string, dictionary: Dictionary): string[] {
+export function roughTokenize(
+  s: string,
+  dictionary: Dictionary | undefined
+): string[] {
   const slug = s
     .replace(/'/g, "")
     .replace(/[^a-zA-Z]/g, " ")
@@ -168,11 +171,25 @@ function search(
   questions: Question[]
 ): SearchResult[] {
   const queryWords = roughTokenize(query, dictionary);
-  const distances = queryWords.map((w) =>
-    dictionary.getDistances(w, questions.length)
+  const distances = queryWords
+    .map((w) => dictionary.getDistances(w, questions.length))
+    .filter((v) => v)
+    .map((v) => v!);
+  if (!distances.length) {
+    return [];
+  }
+
+  const results = questions.map((q) => ({
+    q,
+    distances: distances.map((d) => d[q.id - 1] ** 2),
+    rank: sum(distances.map((d) => d[q.id - 1] ** 2)),
+  }));
+
+  return sortBy(results, [(v) => v.rank, (v) => v.q.usefulWordCount]).map(
+    (v) => ({
+      id: v.q.id,
+    })
   );
-  // TODO
-  return [{ id: 10 }, { id: 20 }, { id: 30 }];
 }
 
 export function useSearch(
@@ -181,7 +198,7 @@ export function useSearch(
 ): SearchResult[] {
   const dictionaryRef = useRef(new Dictionary());
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [_dictionaryUpdateFlag, setDictionaryUpdateFlag] = useState(false);
+  const [_dictionaryUpdateFlag, setDictionaryUpdateCount] = useState(0);
 
   const [staticSearchSupported, setStaticSearchSupported] = useState<boolean>();
 
@@ -194,14 +211,15 @@ export function useSearch(
   useEffect(() => {
     if (staticSearchSupported !== false) {
       prepareDictionaryForSearch(query, dictionaryRef.current).then(() =>
-        setDictionaryUpdateFlag((v) => !v)
+        setDictionaryUpdateCount((v) => v + 1)
       );
     }
   }, [query, staticSearchSupported]);
 
   const staticSearchResults: SearchResult[] = useMemo(
     () => search(query, dictionaryRef.current, questions),
-    [query, questions]
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [query, questions, _dictionaryUpdateFlag]
   );
 
   const [dynamicSearchResults, setDynamicSearchResults] = useState<

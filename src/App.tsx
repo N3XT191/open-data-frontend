@@ -7,6 +7,7 @@ import { chartSettings, getQuestions } from "./api";
 import Background from "./Background";
 import { Question } from "./Interfaces";
 import QuestionSelector from "./QuestionSelector";
+import { roughTokenize } from "./search";
 import { useWindowSize } from "./use-window-size";
 
 function App() {
@@ -16,8 +17,13 @@ function App() {
 
   useEffect(() => {
     const getData = async () => {
-      const data = await getQuestions();
-      setQuestions(data);
+      const data: Omit<Question, "usefulWordCount">[] = await getQuestions();
+      setQuestions(
+        data.map((q) => ({
+          ...q,
+          usefulWordCount: roughTokenize(q.text, undefined).length,
+        }))
+      );
     };
     getData();
   }, []);
