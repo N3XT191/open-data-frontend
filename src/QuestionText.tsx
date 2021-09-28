@@ -1,4 +1,4 @@
-import { chartTitleSize, questionSize } from "./victory-theme";
+import { questionSize } from "./victory-theme";
 
 interface Props {
   text: string;
