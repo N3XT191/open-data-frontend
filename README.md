@@ -20,7 +20,7 @@ This is why we developed AskOpenData.
 
 ## What it does
 
-It’s 3 main goals are to allow ordinary users to discover OGD and through good visualizations, understand the underlying facts. At the same time, we want the data and visualizations to be correct and trusted.
+Its 3 main goals are to allow ordinary users to discover OGD and through good visualizations, understand the underlying facts. At the same time, we want the data and visualizations to be correct and trusted.
 
 A user can search for data visualizations with a Natural Language Input and view them. They can also share the visualizations in the form of a poster which is identical to the ones used in a fictitious ad-campaign we designed to make AskOpenData known to the public.
 
