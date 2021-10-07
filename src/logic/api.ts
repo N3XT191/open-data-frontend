@@ -32,7 +32,6 @@ const sendData = async (
 
 export const getQuestions = async () => await getData("/questions");
 
-
 export const askQuestion = async (question_id: number) => {
   return {
     id: question_id,
