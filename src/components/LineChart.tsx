@@ -57,7 +57,7 @@ export const LineChart = ({ chart, width, height }: Props) => {
 
   return (
     <CenteredLayout>
-      <ChartCard src_label={chart.src_label}>
+      <ChartCard sourceUrl={chart.src_url} sourceLabel={chart.src_label}>
         <VictoryChart
           width={width}
           height={height}

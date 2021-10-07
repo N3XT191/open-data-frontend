@@ -3,7 +3,8 @@ import { css } from "@emotion/css";
 interface Props {
   children: React.ReactNode;
   style?: React.CSSProperties;
-  src_label: string;
+  sourceUrl?: string;
+  sourceLabel?: string;
 }
 
 const styles = {
@@ -11,7 +12,7 @@ const styles = {
     background: white;
     box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.25);
   `,
-  src_label: css`
+  source: css`
     font-size: 15px;
     color: gray;
     margin: 15px;
@@ -21,13 +22,20 @@ const styles = {
   `,
 };
 
-export const ChartCard = ({ children, style, src_label }: Props) => {
+export const ChartCard = ({
+  children,
+  style,
+  sourceUrl,
+  sourceLabel,
+}: Props) => {
   return (
     <div className={styles.outer} style={style}>
       {children}
-      <div className={styles.src_label}>
-        <a href={src_label}>Source</a>
-      </div>
+      {sourceLabel && sourceUrl && (
+        <div className={styles.source}>
+          <a href={sourceUrl}>{sourceLabel}</a>
+        </div>
+      )}
     </div>
   );
 };

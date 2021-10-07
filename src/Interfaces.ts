@@ -21,6 +21,7 @@ interface FrontendSettings {
   graph_label?: string;
   hide_x_axis?: boolean;
   domain_padding?: DomainPaddingPropType;
+  src_url: string;
   src_label: string;
 }
 export interface Answer extends FrontendSettings {
