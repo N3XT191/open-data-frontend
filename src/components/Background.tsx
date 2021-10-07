@@ -1,6 +1,6 @@
 import { css } from "@emotion/css";
 import { CornerTriangle } from "./CornerTriangle";
-import { greys } from "./victory-theme";
+import { greys } from "../victory-theme";
 
 const styles = {
   wrapper: css`

@@ -1,5 +1,5 @@
 import BarChart from "./BarChart";
-import { Answer } from "./Interfaces";
+import { Answer } from "../Interfaces";
 import LineChart from "./LineChart";
 import MapChart from "./MapChart";
 import MultiLineChart from "./MultiLineChart";

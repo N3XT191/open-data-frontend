@@ -5,10 +5,15 @@ import { times } from "lodash";
 import React, { useState } from "react";
 import { CenteredLayout } from "./CenteredLayout";
 import { ChartCard } from "./ChartCard";
-import { Answer } from "./Interfaces";
-import geoJson from "./map-data/stadtkreise.json";
-import { chartTitleSize, colors, colorsForScale, greys } from "./victory-theme";
-import zurisee from "./map-data/zurisee.json";
+import { Answer } from "../Interfaces";
+import geoJson from "../map-data/stadtkreise.json";
+import {
+  chartTitleSize,
+  colors,
+  colorsForScale,
+  greys,
+} from "../victory-theme";
+import zurisee from "../map-data/zurisee.json";
 
 type Props = {
   chart: Answer;

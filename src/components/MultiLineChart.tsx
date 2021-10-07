@@ -7,7 +7,7 @@ import {
 } from "victory";
 import { CenteredLayout } from "./CenteredLayout";
 import { ChartCard } from "./ChartCard";
-import { Answer } from "./Interfaces";
+import { Answer } from "../Interfaces";
 import {
   chartTitleSize,
   chartTitleY,
@@ -16,7 +16,7 @@ import {
   defaultChartPadding,
   dotsBackgroundDefs,
   dotsBackgroundStyle,
-} from "./victory-theme";
+} from "../victory-theme";
 
 interface Props {
   chart: Answer;

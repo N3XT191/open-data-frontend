@@ -8,8 +8,8 @@ import {
 } from "victory";
 import { CenteredLayout } from "./CenteredLayout";
 import { ChartCard } from "./ChartCard";
-import { Answer } from "./Interfaces";
-import { getLabelWidth, tickFormat } from "./measured-ticks";
+import { Answer } from "../Interfaces";
+import { getLabelWidth, tickFormat } from "../measured-ticks";
 import {
   chartBottomPaddingNoAxis,
   chartLeftPaddingMeasuredExtra,
@@ -20,7 +20,7 @@ import {
   defaultChartPadding,
   dotsBackgroundDefs,
   dotsBackgroundStyle,
-} from "./victory-theme";
+} from "../victory-theme";
 
 interface Props {
   chart: Answer;

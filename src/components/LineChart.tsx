@@ -1,4 +1,4 @@
-import { Answer } from "./Interfaces";
+import { Answer } from "../Interfaces";
 import {
   VictoryArea,
   VictoryAxis,
@@ -9,7 +9,7 @@ import {
 import { ChartCard } from "./ChartCard";
 import { CenteredLayout } from "./CenteredLayout";
 import { useMemo } from "react";
-import { getLabelWidth, tickFormat } from "./measured-ticks";
+import { getLabelWidth, tickFormat } from "../measured-ticks";
 import {
   defaultChartPadding,
   chartTopPaddingNoTitle,
@@ -20,7 +20,7 @@ import {
   dotsBackgroundDefs,
   chartTitleSize,
   chartTitleY,
-} from "./victory-theme";
+} from "../victory-theme";
 
 interface Props {
   chart: Answer;

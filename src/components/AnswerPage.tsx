@@ -2,11 +2,11 @@ import { css } from "@emotion/css";
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { askQuestion, chartSettings } from "./api";
+import { askQuestion, chartSettings } from "../api";
 import Chart from "./Chart";
-import { Answer, Question } from "./Interfaces";
+import { Answer, Question } from "../Interfaces";
 import { QuestionText } from "./QuestionText";
-import { colors } from "./victory-theme";
+import { colors } from "../victory-theme";
 
 interface Props {
   question: Question;

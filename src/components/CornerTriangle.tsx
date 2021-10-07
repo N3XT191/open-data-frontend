@@ -1,5 +1,5 @@
 import { css } from "@emotion/css";
-import { colors } from "./victory-theme";
+import { colors } from "../victory-theme";
 
 interface Props {
   height: number;

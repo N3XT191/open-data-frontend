@@ -2,10 +2,10 @@ import { css } from "@emotion/css";
 import { motion } from "framer-motion";
 import { useEffect, useMemo, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
-import { Question } from "./Interfaces";
+import { Question } from "../Interfaces";
 import { QuestionText } from "./QuestionText";
-import { useSearch } from "./search";
-import { colors, greys } from "./victory-theme";
+import { useSearch } from "../search";
+import { colors, greys } from "../victory-theme";
 
 const styles = {
   wrapper: css`

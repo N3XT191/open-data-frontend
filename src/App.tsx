@@ -2,11 +2,11 @@ import { AnimateSharedLayout, motion } from "framer-motion";
 import { groupBy, shuffle } from "lodash";
 import { useEffect, useState } from "react";
 import { Redirect, Route, Switch, useHistory } from "react-router-dom";
-import AnswerPage from "./AnswerPage";
 import { chartSettings, getQuestions } from "./api";
-import Background from "./Background";
+import AnswerPage from "./components/AnswerPage";
+import Background from "./components/Background";
+import QuestionSelector from "./components/QuestionSelector";
 import { Question } from "./Interfaces";
-import QuestionSelector from "./QuestionSelector";
 import { roughTokenize } from "./search";
 import { useWindowSize } from "./use-window-size";
 
