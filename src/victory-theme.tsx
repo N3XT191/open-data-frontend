@@ -1,3 +1,5 @@
+// based on the official template: https://formidable.com/open-source/victory/guides/themes/
+
 import { VictoryThemeDefinition } from "victory";
 
 const assign = Object.assign;
