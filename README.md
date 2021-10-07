@@ -26,4 +26,4 @@ A user can search for data visualizations with a Natural Language Input and view
 
 ## Developer documentation
 
-See [./doc/developing.md](./doc/developing.md).
+For step-by-step instructions to host your own version, see [./doc/developing.md](./doc/developing.md).
