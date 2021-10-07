@@ -1,7 +1,7 @@
 import { sortBy, sortedIndexOf, sum } from "lodash";
 import { useEffect, useMemo, useRef, useState } from "react";
+import { Question } from "../Interfaces";
 import { baseURL, getSearchResults } from "./api";
-import { Question } from "./Interfaces";
 
 function stemWord(w: string, dictionary: Dictionary | undefined) {
   if (w === "does") {

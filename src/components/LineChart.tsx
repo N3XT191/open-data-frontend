@@ -7,7 +7,7 @@ import {
   VictoryLine,
 } from "victory";
 import { Answer } from "../Interfaces";
-import { getLabelWidth, tickFormat } from "../measured-ticks";
+import { getLabelWidth, tickFormat } from "../logic/measured-ticks";
 import {
   chartBottomPaddingNoAxis,
   chartLeftPaddingMeasuredExtra,

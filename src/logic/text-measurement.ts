@@ -1,4 +1,4 @@
-import { fontSize, sansSerif } from "./victory-theme";
+import { fontSize, sansSerif } from "../victory-theme";
 
 export interface TextSize {
   width: number;
