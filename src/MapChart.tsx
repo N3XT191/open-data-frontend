@@ -45,7 +45,7 @@ const Map = ({ chart, width: targetWidth, height: targetHeight }: Props) => {
   const path = geoPath().projection(projection);
 
   const valuesWithoutCity = chart.data.values.filter(
-    (v: any) => v.placeId !== 0
+    (v: any) => v.placeId !== 0,
   );
 
   const colorBarX = width - 60;
@@ -125,7 +125,7 @@ const Map = ({ chart, width: targetWidth, height: targetHeight }: Props) => {
                     <stop
                       offset={p * 100 + "%"}
                       stopColor={colorScale(
-                        p * colorAxisDomain[0] + (1 - p) * colorAxisDomain[1]
+                        p * colorAxisDomain[0] + (1 - p) * colorAxisDomain[1],
                       )}
                       key={i}
                     />

@@ -8,8 +8,7 @@ import * as Sentry from "@sentry/react";
 import { Integrations } from "@sentry/tracing";
 
 Sentry.init({
-  dsn:
-    "https://ff70707498a74075b9f0428acfd33dd7@o1014129.ingest.sentry.io/5979418",
+  dsn: "https://ff70707498a74075b9f0428acfd33dd7@o1014129.ingest.sentry.io/5979418",
   integrations: [new Integrations.BrowserTracing()],
 
   // Set tracesSampleRate to 1.0 to capture 100%
@@ -24,7 +23,7 @@ ReactDOM.render(
       <App />
     </Router>
   </React.StrictMode>,
-  document.getElementById("root")
+  document.getElementById("root"),
 );
 
 // If you want to start measuring performance in your app, pass a function

@@ -9,19 +9,19 @@ export const tickFormat = (v: unknown) => {
 
 export function getLabelWidth(
   chartData: unknown[],
-  axis: "x" | "y"
+  axis: "x" | "y",
 ): number | undefined {
   if (chartData.length > 100) {
     console.warn(
       "unexpectedly many items passed to getLabelWidth",
-      chartData.length
+      chartData.length,
     );
   }
 
   if (chartData.some((e: any) => e[axis] === undefined)) {
     console.log(
       "getLabelWidth got undefined - are you sure your data has the right format",
-      chartData
+      chartData,
     );
   }
 
@@ -30,6 +30,6 @@ export function getLabelWidth(
     return undefined;
   }
   return Math.max(
-    ...labels.map((l) => textMeasurementCaches.plotLabel.measure(l).width)
+    ...labels.map((l) => textMeasurementCaches.plotLabel.measure(l).width),
   );
 }

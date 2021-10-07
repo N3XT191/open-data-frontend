@@ -46,13 +46,13 @@ const LineChart: React.FC<Props> = ({ chart, width, height }) => {
         [
           {
             y: Math.round(
-              Math.max(...chart.data.map((e: any) => e.y as number))
+              Math.max(...chart.data.map((e: any) => e.y as number)),
             ),
           },
         ],
-        "y"
+        "y",
       ),
-    [chart.data]
+    [chart.data],
   );
 
   return (

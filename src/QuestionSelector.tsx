@@ -97,7 +97,7 @@ const QuestionSelector: React.FC<Props> = ({ questions, windowSize }) => {
 
   const suggestions = useMemo(
     () => allSuggestions.slice(listOffset, maxSuggestions + listOffset),
-    [listOffset, allSuggestions]
+    [listOffset, allSuggestions],
   );
 
   useEffect(() => {
@@ -113,7 +113,7 @@ const QuestionSelector: React.FC<Props> = ({ questions, windowSize }) => {
         const offset = ev.key === "ArrowUp" ? -1 : 1;
         if (selectedIndex === 2 && ev.key === "ArrowDown") {
           setListOffset((i) =>
-            Math.min(i + 1, allSuggestions.length - maxSuggestions + 1)
+            Math.min(i + 1, allSuggestions.length - maxSuggestions + 1),
           );
         } else if (selectedIndex === 0 && ev.key === "ArrowUp") {
           setListOffset((i) => Math.max(i - 1, 0));

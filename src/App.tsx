@@ -22,7 +22,7 @@ function App() {
         data.map((q) => ({
           ...q,
           usefulWordCount: roughTokenize(q.text, undefined).length,
-        }))
+        })),
       );
     };
     getData();
@@ -44,10 +44,10 @@ function App() {
               ...Object.values(
                 groupBy(
                   chartSettings.filter((s) => true),
-                  (e) => e.chart_type
-                )
+                  (e) => e.chart_type,
+                ),
               ),
-            ])[0] || []
+            ])[0] || [],
           )[0];
         };
 
@@ -75,7 +75,7 @@ function App() {
               path="/ask/:q"
               render={(routeProps) => {
                 const question = questions.find(
-                  (q) => q.id === +routeProps.match.params.q
+                  (q) => q.id === +routeProps.match.params.q,
                 );
                 return (
                   question && (

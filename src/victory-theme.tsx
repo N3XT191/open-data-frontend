@@ -3,7 +3,7 @@ import { VictoryThemeDefinition } from "victory";
 const assign = Object.assign;
 
 export const colors = ["8321A3", "1EB392", "e34f2d", "12694d", "51e1b4"].map(
-  (v) => `#${v}`
+  (v) => `#${v}`,
 );
 export const greys = ["#000000", "#454545", "#cccccc", "#eeeeee"];
 
@@ -89,7 +89,7 @@ export const customTheme: VictoryThemeDefinition = {
         labels: baseLabelStyles,
       },
     },
-    baseProps
+    baseProps,
   ),
   axis: assign(
     {
@@ -122,7 +122,7 @@ export const customTheme: VictoryThemeDefinition = {
         }),
       },
     },
-    baseProps
+    baseProps,
   ),
   polarDependentAxis: assign({
     style: {
@@ -144,7 +144,7 @@ export const customTheme: VictoryThemeDefinition = {
         labels: baseLabelStyles,
       },
     },
-    baseProps
+    baseProps,
   ),
   boxplot: assign(
     {
@@ -162,7 +162,7 @@ export const customTheme: VictoryThemeDefinition = {
       },
       boxWidth: 20,
     },
-    baseProps
+    baseProps,
   ),
   candlestick: assign(
     {
@@ -177,7 +177,7 @@ export const customTheme: VictoryThemeDefinition = {
         negative: blueGrey700,
       },
     },
-    baseProps
+    baseProps,
   ),
   chart: baseProps,
   errorbar: assign(
@@ -193,13 +193,13 @@ export const customTheme: VictoryThemeDefinition = {
         labels: baseLabelStyles,
       },
     },
-    baseProps
+    baseProps,
   ),
   group: assign(
     {
       colorScale: colorsForScale,
     },
-    baseProps
+    baseProps,
   ),
   histogram: assign(
     {
@@ -210,7 +210,7 @@ export const customTheme: VictoryThemeDefinition = {
         labels: baseLabelStyles,
       },
     },
-    baseProps
+    baseProps,
   ),
   legend: {
     colorScale: colorsForScale,
@@ -237,7 +237,7 @@ export const customTheme: VictoryThemeDefinition = {
         labels: baseLabelStyles,
       },
     },
-    baseProps
+    baseProps,
   ),
   pie: assign(
     {
@@ -249,7 +249,7 @@ export const customTheme: VictoryThemeDefinition = {
         labels: assign({}, baseLabelStyles, { padding: 20 }),
       },
     },
-    baseProps
+    baseProps,
   ),
   scatter: assign(
     {
@@ -263,13 +263,13 @@ export const customTheme: VictoryThemeDefinition = {
         labels: baseLabelStyles,
       },
     },
-    baseProps
+    baseProps,
   ),
   stack: assign(
     {
       colorScale: colorsForScale,
     },
-    baseProps
+    baseProps,
   ),
   tooltip: {
     style: assign({}, baseLabelStyles, { padding: 0, pointerEvents: "none" }),

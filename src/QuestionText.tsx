@@ -24,7 +24,7 @@ function getExpectedWidthForAnswer(windowWidth: number): number {
 export const QuestionText = ({ text, windowSize }: Props) => {
   const width = Math.min(
     getExpectedWidthForQuestion(windowSize.width),
-    getExpectedWidthForAnswer(windowSize.width)
+    getExpectedWidthForAnswer(windowSize.width),
   );
   const fontSize = windowSize.width <= 900 ? 30 : questionSize;
   return (

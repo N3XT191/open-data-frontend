@@ -17,12 +17,12 @@ function stemWord(w: string, dictionary: Dictionary | undefined) {
 const stopWords = new Set(
   "a the does did how much is in zurich use there what whats where"
     .split(" ")
-    .map((w) => stemWord(w, undefined))
+    .map((w) => stemWord(w, undefined)),
 );
 
 export function roughTokenize(
   s: string,
-  dictionary: Dictionary | undefined
+  dictionary: Dictionary | undefined,
 ): string[] {
   const slug = s
     .replace(/'/g, "")
@@ -147,7 +147,7 @@ class DictionaryChunk {
 
 function prepareDictionaryForSearch(
   query: string,
-  dictionary: Dictionary
+  dictionary: Dictionary,
 ): Promise<unknown> {
   const queryWords = roughTokenize(query, dictionary);
   console.log("DEBUG queryWords", queryWords);
@@ -156,9 +156,9 @@ function prepareDictionaryForSearch(
       dictionary
         .tryLoadWord(w)
         .catch((err) =>
-          console.warn("failed to load dictionary chunk for word", w, err)
-        )
-    )
+          console.warn("failed to load dictionary chunk for word", w, err),
+        ),
+    ),
   );
 }
 
@@ -169,7 +169,7 @@ export interface SearchResult {
 function search(
   query: string,
   dictionary: Dictionary,
-  questions: Question[]
+  questions: Question[],
 ): SearchResult[] {
   const queryWords = roughTokenize(query, dictionary);
   const distances = queryWords
@@ -189,13 +189,13 @@ function search(
   return sortBy(results, [(v) => v.rank, (v) => v.q.usefulWordCount]).map(
     (v) => ({
       id: v.q.id,
-    })
+    }),
   );
 }
 
 export function useSearch(
   query: string,
-  questions: Question[]
+  questions: Question[],
 ): SearchResult[] {
   const dictionaryRef = useRef(new Dictionary());
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -212,7 +212,7 @@ export function useSearch(
   useEffect(() => {
     if (staticSearchSupported !== false) {
       prepareDictionaryForSearch(query, dictionaryRef.current).then(() =>
-        setDictionaryUpdateCount((v) => v + 1)
+        setDictionaryUpdateCount((v) => v + 1),
       );
     }
   }, [query, staticSearchSupported]);
@@ -220,7 +220,7 @@ export function useSearch(
   const staticSearchResults: SearchResult[] = useMemo(
     () => search(query, dictionaryRef.current, questions),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [query, questions, _dictionaryUpdateFlag]
+    [query, questions, _dictionaryUpdateFlag],
   );
 
   const [dynamicSearchResults, setDynamicSearchResults] = useState<

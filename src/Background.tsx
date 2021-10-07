@@ -36,7 +36,7 @@ interface Props {
 const Background: React.FC<Props> = ({ windowSize }) => {
   const scalingFactor = Math.min(
     Math.min(windowSize.height / 800, windowSize.width / 800),
-    1
+    1,
   );
   return (
     <div className={styles.wrapper}>

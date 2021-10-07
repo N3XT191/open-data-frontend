@@ -14,7 +14,7 @@ const getData = async (route: string) => {
 const sendData = async (
   route: string,
   payload: object,
-  method: string = "post"
+  method: string = "post",
 ) => {
   const res = await fetch(baseURL + route, {
     method,

@@ -71,7 +71,7 @@ const styles = {
 
 export function getChartSize(
   question: Question,
-  windowSize: { width: number; height: number }
+  windowSize: { width: number; height: number },
 ): { width: number; height: number } {
   let widthPadding = 200;
   let heightPadding = 350;
@@ -91,12 +91,12 @@ export function getChartSize(
   let height = windowSize.height
     ? Math.min(
         Math.max(windowSize.height - heightPadding, minHeight),
-        maxHeight
+        maxHeight,
       )
     : minHeight;
 
   const isMap = chartSettings.some(
-    (s) => s.id === question.id && s.chart_type === "map"
+    (s) => s.id === question.id && s.chart_type === "map",
   );
   if (isMap) {
     width *= 0.8;
@@ -120,14 +120,17 @@ const AnswerPage: React.FC<Props> = ({ question, windowSize }) => {
       const targetDelay = 500;
       const delay = Math.max(
         0,
-        Math.min(targetDelay, targetDelay - (Date.now() - mountedAtRef.current))
+        Math.min(
+          targetDelay,
+          targetDelay - (Date.now() - mountedAtRef.current),
+        ),
       );
       if (delay) {
         await new Promise((resolve) =>
           setTimeout(
             () => resolve("HACK delay to prevent animation stutter"),
-            delay
-          )
+            delay,
+          ),
         );
       }
 
