@@ -1,12 +1,8 @@
 import { css } from "@emotion/css";
 import { motion } from "framer-motion";
-import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { Question } from "./Interfaces";
-import {
-  globalLastSeenQuestionsRef,
-  LastSeenQuestion,
-} from "./last-seen-questions";
 import { QuestionText } from "./QuestionText";
 import { useSearch } from "./search";
 import { colors, greys } from "./victory-theme";
@@ -134,40 +130,6 @@ const QuestionSelector: React.FC<Props> = ({ questions, windowSize }) => {
   });
   const history = useHistory();
 
-  const suggestionsParentDivRef = useRef<HTMLDivElement>(null);
-  const updateStuff = () => {
-    globalLastSeenQuestionsRef.current = suggestions
-      .map((s, i): LastSeenQuestion | undefined => {
-        if (suggestionsParentDivRef.current === null) {
-          return undefined;
-        }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-        const children = suggestionsParentDivRef.current.childNodes;
-        if (i >= children.length) {
-          return undefined;
-        }
-        const child = children[i] as HTMLDivElement;
-        const rect = child.getBoundingClientRect();
-        return {
-          id: s.id,
-          offset: { x: rect.left, y: rect.top },
-        };
-      })
-      .filter((v) => v)
-      .map((v) => v!);
-  };
-
-  useLayoutEffect(() => {
-    updateStuff();
-    const onScroll = () => {
-      updateStuff();
-    };
-    document.addEventListener("scroll", onScroll);
-    return () => {
-      document.removeEventListener("scroll", onScroll);
-    };
-  });
-
   return (
     <div className={styles.wrapper}>
       <div className={styles.appName}>Ask Open Data</div>
@@ -190,7 +152,7 @@ const QuestionSelector: React.FC<Props> = ({ questions, windowSize }) => {
           autoFocus
         />
       </form>
-      <div ref={suggestionsParentDivRef}>
+      <div>
         {suggestions.map((s, i) => {
           const active = i === selectedIndex;
           return (
