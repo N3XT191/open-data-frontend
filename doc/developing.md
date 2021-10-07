@@ -16,6 +16,7 @@ The frontend is a very typical React app made with
 [create-react-app](https://reactjs.org/docs/create-a-new-react-app.html). To get a local development environment:
 
 - Install [Node.js](https://nodejs.org/en/) (v14 LTS) and [Yarn](https://classic.yarnpkg.com/en/docs/install) (classic)
+- Clone [this repo](https://github.com/N3XT191/open-data-frontend)
 - Run `yarn` at the repository root (the folder with `yarn.lock`) to install dependencies from NPM
 - Run `yarn start` to start a local development server for the frontend
 
@@ -42,6 +43,7 @@ The backend is a Python application which uses [FastAPI](https://fastapi.tiangol
 First set up Python and install dependencies. The steps here are for `pip` and a virtual environment, but you don't necessarily have to use those.
 
 - Install [Python](https://www.python.org/) (v3.9) and pip
+- Clone the [backend repo](https://github.com/tehwalris/open-data-backend)
 - Create a virtual environment: `python3 -m venv .venv`
 - Activate the virtual environment: `source .venv/bin/activate`
 - Install dependencies: `pip install -r requirements.txt`
