@@ -1,5 +1,5 @@
 import { sortBy, sortedIndexOf, sum } from "lodash";
-import { useState, useEffect, useRef, useMemo } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { baseURL, getSearchResults } from "./api";
 import { Question } from "./Interfaces";
 

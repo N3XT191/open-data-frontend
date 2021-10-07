@@ -3,9 +3,9 @@ import { motion } from "framer-motion";
 import { useEffect, useMemo, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { Question } from "../Interfaces";
-import { QuestionText } from "./QuestionText";
 import { useSearch } from "../search";
 import { colors, greys } from "../victory-theme";
+import { QuestionText } from "./QuestionText";
 
 const styles = {
   wrapper: css`

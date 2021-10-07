@@ -3,10 +3,10 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { askQuestion, chartSettings } from "../api";
-import Chart from "./Chart";
 import { Answer, Question } from "../Interfaces";
-import { QuestionText } from "./QuestionText";
 import { colors } from "../victory-theme";
+import Chart from "./Chart";
+import { QuestionText } from "./QuestionText";
 
 interface Props {
   question: Question;

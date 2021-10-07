@@ -5,8 +5,6 @@ import {
   VictoryLegend,
   VictoryLine,
 } from "victory";
-import { CenteredLayout } from "./CenteredLayout";
-import { ChartCard } from "./ChartCard";
 import { Answer } from "../Interfaces";
 import {
   chartTitleSize,
@@ -17,6 +15,8 @@ import {
   dotsBackgroundDefs,
   dotsBackgroundStyle,
 } from "../victory-theme";
+import { CenteredLayout } from "./CenteredLayout";
+import { ChartCard } from "./ChartCard";
 
 interface Props {
   chart: Answer;

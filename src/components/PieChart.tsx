@@ -1,8 +1,8 @@
-import { Answer } from "../Interfaces";
 import { VictoryPie } from "victory";
+import { Answer } from "../Interfaces";
+import { colors } from "../victory-theme";
 import { CenteredLayout } from "./CenteredLayout";
 import { ChartCard } from "./ChartCard";
-import { colors } from "../victory-theme";
 
 interface Props {
   chart: Answer;

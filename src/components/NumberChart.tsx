@@ -1,7 +1,7 @@
-import { CenteredLayout } from "./CenteredLayout";
-import { ChartCard } from "./ChartCard";
 import { Answer } from "../Interfaces";
 import { colors } from "../victory-theme";
+import { CenteredLayout } from "./CenteredLayout";
+import { ChartCard } from "./ChartCard";
 
 interface Props {
   chart: Answer;
