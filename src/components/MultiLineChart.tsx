@@ -39,7 +39,7 @@ export const MultiLineChart = ({ chart, width, height }: Props) => {
 
   return (
     <CenteredLayout>
-      <ChartCard>
+      <ChartCard src_label={chart.src_label}>
         <VictoryChart
           width={width}
           height={height}

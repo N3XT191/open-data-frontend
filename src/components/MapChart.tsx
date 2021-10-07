@@ -77,6 +77,7 @@ const _MapChart = ({
   return (
     <CenteredLayout>
       <ChartCard
+        src_label=""
         style={{
           width: 200,
           marginRight: 30,
@@ -98,7 +99,7 @@ const _MapChart = ({
           </div>
         )}
       </ChartCard>
-      <ChartCard style={{ padding: 30 }}>
+      <ChartCard src_label={chart.src_label} style={{ padding: 30 }}>
         <div
           style={{
             position: "relative",

@@ -13,7 +13,7 @@ interface Props {
 export const PieChart = ({ chart, width, height }: Props) => {
   return (
     <CenteredLayout>
-      <ChartCard>
+      <ChartCard src_label={chart.src_label}>
         <VictoryPie
           width={width}
           height={height}

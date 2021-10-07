@@ -1,23 +1,23 @@
 import { useMemo } from "react";
 import {
-  VictoryArea,
-  VictoryAxis,
-  VictoryChart,
-  VictoryLabel,
-  VictoryLine,
+VictoryArea,
+VictoryAxis,
+VictoryChart,
+VictoryLabel,
+VictoryLine
 } from "victory";
 import { Answer } from "../Interfaces";
-import { getLabelWidth, tickFormat } from "../logic/measured-ticks";
+import { getLabelWidth,tickFormat } from "../logic/measured-ticks";
 import {
-  chartBottomPaddingNoAxis,
-  chartLeftPaddingMeasuredExtra,
-  chartTitleSize,
-  chartTitleY,
-  chartTopPaddingNoTitle,
-  customTheme,
-  defaultChartPadding,
-  dotsBackgroundDefs,
-  dotsBackgroundStyle,
+chartBottomPaddingNoAxis,
+chartLeftPaddingMeasuredExtra,
+chartTitleSize,
+chartTitleY,
+chartTopPaddingNoTitle,
+customTheme,
+defaultChartPadding,
+dotsBackgroundDefs,
+dotsBackgroundStyle
 } from "../victory-theme";
 import { CenteredLayout } from "./CenteredLayout";
 import { ChartCard } from "./ChartCard";
@@ -57,7 +57,7 @@ export const LineChart = ({ chart, width, height }: Props) => {
 
   return (
     <CenteredLayout>
-      <ChartCard>
+      <ChartCard src_label={chart.src_label}>
         <VictoryChart
           width={width}
           height={height}

@@ -12,7 +12,7 @@ interface Props {
 export const NumberChart = ({ chart }: Props) => {
   return (
     <CenteredLayout>
-      <ChartCard>
+      <ChartCard src_label={chart.src_label}>
         <div
           style={{
             display: "flex",
