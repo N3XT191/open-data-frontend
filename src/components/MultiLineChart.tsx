@@ -23,8 +23,10 @@ interface Props {
   width: number;
   height: number;
 }
+
 const colors = [globalColors[1], globalColors[0], globalColors[2]];
-const MultiLineChart: React.FC<Props> = ({ chart, width, height }) => {
+
+export const MultiLineChart = ({ chart, width, height }: Props) => {
   const keys = Object.keys(chart.data[0]);
   const monthTicks = {
     31: "Feb",
@@ -94,4 +96,3 @@ const MultiLineChart: React.FC<Props> = ({ chart, width, height }) => {
     </CenteredLayout>
   );
 };
-export default MultiLineChart;

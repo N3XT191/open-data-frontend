@@ -2,15 +2,15 @@ import { AnimateSharedLayout, motion } from "framer-motion";
 import { groupBy, shuffle } from "lodash";
 import { useEffect, useState } from "react";
 import { Redirect, Route, Switch, useHistory } from "react-router-dom";
-import { chartSettings, getQuestions } from "./logic/api";
-import AnswerPage from "./components/AnswerPage";
-import Background from "./components/Background";
-import QuestionSelector from "./components/QuestionSelector";
+import { AnswerPage } from "./components/AnswerPage";
+import { Background } from "./components/Background";
+import { QuestionSelector } from "./components/QuestionSelector";
 import { Question } from "./Interfaces";
+import { chartSettings, getQuestions } from "./logic/api";
 import { roughTokenize } from "./logic/search";
 import { useWindowSize } from "./logic/use-window-size";
 
-function App() {
+export const App = () => {
   const [questions, setQuestions] = useState<Question[]>([]);
 
   const history = useHistory();
@@ -109,6 +109,4 @@ function App() {
       <Background windowSize={windowSize} />
     </>
   );
-}
-
-export default App;
+};

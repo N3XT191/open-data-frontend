@@ -73,7 +73,7 @@ interface Props {
   windowSize: { width: number; height: number };
 }
 
-const QuestionSelector: React.FC<Props> = ({ questions, windowSize }) => {
+export const QuestionSelector = ({ questions, windowSize }: Props) => {
   const [searchValue, setSearchValue] = useState("");
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [listOffset, setListOffset] = useState(0);
@@ -179,5 +179,3 @@ const QuestionSelector: React.FC<Props> = ({ questions, windowSize }) => {
     </div>
   );
 };
-
-export default QuestionSelector;

@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { Answer, Question } from "../Interfaces";
 import { askQuestion, chartSettings } from "../logic/api";
 import { colors } from "../victory-theme";
-import Chart from "./Chart";
+import { Chart } from "./Chart";
 import { QuestionText } from "./QuestionText";
 
 interface Props {
@@ -106,7 +106,7 @@ export function getChartSize(
   return { width, height };
 }
 
-const AnswerPage: React.FC<Props> = ({ question, windowSize }) => {
+export const AnswerPage = ({ question, windowSize }: Props) => {
   const [answer, setAnswer] = useState<Answer | undefined>();
 
   const mountedAtRef = useRef(Date.now());
@@ -185,5 +185,3 @@ const AnswerPage: React.FC<Props> = ({ question, windowSize }) => {
     </div>
   );
 };
-
-export default AnswerPage;

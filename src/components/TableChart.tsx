@@ -47,7 +47,8 @@ const units = [
     Einheit: "µg/m3",
   },
 ];
-const TableChart: React.FC<Props> = ({ chart, width, height }) => {
+
+export const TableChart = ({ chart }: Props) => {
   return (
     <CenteredLayout>
       <ChartCard>
@@ -89,4 +90,3 @@ const TableChart: React.FC<Props> = ({ chart, width, height }) => {
     </CenteredLayout>
   );
 };
-export default TableChart;

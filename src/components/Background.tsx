@@ -33,7 +33,7 @@ const styles = {
 interface Props {
   windowSize: { width: number; height: number };
 }
-const Background: React.FC<Props> = ({ windowSize }) => {
+export const Background = ({ windowSize }: Props) => {
   const scalingFactor = Math.min(
     Math.min(windowSize.height / 800, windowSize.width / 800),
     1,
@@ -60,4 +60,3 @@ const Background: React.FC<Props> = ({ windowSize }) => {
     </div>
   );
 };
-export default Background;

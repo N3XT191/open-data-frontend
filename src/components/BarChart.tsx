@@ -28,7 +28,7 @@ interface Props {
   height: number;
 }
 
-const BarChart: React.FC<Props> = ({ chart, width, height }) => {
+export const BarChart = ({ chart, width, height }: Props) => {
   const yLabelWidth = useMemo(
     () => getLabelWidth(chart.data, "x"),
     [chart.data],
@@ -96,4 +96,3 @@ const BarChart: React.FC<Props> = ({ chart, width, height }) => {
     </CenteredLayout>
   );
 };
-export default BarChart;

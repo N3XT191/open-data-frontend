@@ -9,7 +9,8 @@ interface Props {
   width: number;
   height: number;
 }
-const PieChart: React.FC<Props> = ({ chart, width, height }) => {
+
+export const PieChart = ({ chart, width, height }: Props) => {
   return (
     <CenteredLayout>
       <ChartCard>
@@ -25,4 +26,3 @@ const PieChart: React.FC<Props> = ({ chart, width, height }) => {
     </CenteredLayout>
   );
 };
-export default PieChart;

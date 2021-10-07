@@ -28,7 +28,7 @@ interface Props {
   height: number;
 }
 
-const LineChart: React.FC<Props> = ({ chart, width, height }) => {
+export const LineChart = ({ chart, width, height }: Props) => {
   const data = useMemo(() => {
     if (chart.x_axis_time) {
       return chart.data.map((point: any) => ({
@@ -108,4 +108,3 @@ const LineChart: React.FC<Props> = ({ chart, width, height }) => {
     </CenteredLayout>
   );
 };
-export default LineChart;

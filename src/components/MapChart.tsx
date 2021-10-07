@@ -21,7 +21,11 @@ type Props = {
   height: number;
 };
 
-const Map = ({ chart, width: targetWidth, height: targetHeight }: Props) => {
+const _MapChart = ({
+  chart,
+  width: targetWidth,
+  height: targetHeight,
+}: Props) => {
   const [activeKreis, setActiveKreis] = useState(0);
   const [minX, minY, maxX, maxY] = bbox(geoJson);
 
@@ -198,4 +202,4 @@ const Map = ({ chart, width: targetWidth, height: targetHeight }: Props) => {
   );
 };
 
-export default React.memo(Map);
+export const MapChart = React.memo(_MapChart);

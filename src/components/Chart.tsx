@@ -1,11 +1,11 @@
 import { Answer } from "../Interfaces";
-import BarChart from "./BarChart";
-import LineChart from "./LineChart";
-import MapChart from "./MapChart";
-import MultiLineChart from "./MultiLineChart";
-import NumberChart from "./NumberChart";
-import PieChart from "./PieChart";
-import TableChart from "./TableChart";
+import { BarChart } from "./BarChart";
+import { LineChart } from "./LineChart";
+import { MapChart } from "./MapChart";
+import { MultiLineChart } from "./MultiLineChart";
+import { NumberChart } from "./NumberChart";
+import { PieChart } from "./PieChart";
+import { TableChart } from "./TableChart";
 
 interface Props {
   chart: Answer;
@@ -13,7 +13,7 @@ interface Props {
   height: number;
 }
 
-const Chart: React.FC<Props> = ({ chart, width, height }) => {
+export const Chart = ({ chart, width, height }: Props) => {
   if (chart.chart_type === "line") {
     return <LineChart chart={chart} width={width} height={height} />;
   } else if (chart.chart_type === "multi-line") {
@@ -31,4 +31,3 @@ const Chart: React.FC<Props> = ({ chart, width, height }) => {
   }
   return <>I don't know chart_type: {chart.chart_type}</>;
 };
-export default Chart;

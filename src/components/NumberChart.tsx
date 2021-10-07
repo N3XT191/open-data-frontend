@@ -9,7 +9,7 @@ interface Props {
   height: number;
 }
 
-const NumberChart: React.FC<Props> = ({ chart, width, height }) => {
+export const NumberChart = ({ chart }: Props) => {
   return (
     <CenteredLayout>
       <ChartCard>
@@ -30,4 +30,3 @@ const NumberChart: React.FC<Props> = ({ chart, width, height }) => {
     </CenteredLayout>
   );
 };
-export default NumberChart;
