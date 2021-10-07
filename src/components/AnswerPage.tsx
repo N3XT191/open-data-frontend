@@ -3,7 +3,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { Answer, Question } from "../Interfaces";
-import { askQuestion, chartSettings } from "../logic/api";
+import { askQuestion } from "../logic/api";
 import { colors } from "../victory-theme";
 import { Chart } from "./Chart";
 import { QuestionText } from "./QuestionText";
@@ -95,9 +95,7 @@ export function getChartSize(
       )
     : minHeight;
 
-  const isMap = chartSettings.some(
-    (s) => s.id === question.id && s.chart_type === "map",
-  );
+  const isMap = question.frontend_settings.chart_type === "map";
   if (isMap) {
     width *= 0.8;
     height *= 0.8;
@@ -115,7 +113,10 @@ export const AnswerPage = ({ question, windowSize }: Props) => {
     let shouldCancel = false;
     const getData = async () => {
       setAnswer(undefined);
-      const answer_data = await askQuestion(question.id);
+      const answer_data: Answer = {
+        ...(await askQuestion(question.id)),
+        ...question.frontend_settings,
+      };
 
       const targetDelay = 500;
       const delay = Math.max(

@@ -1,19 +1,16 @@
 import { AnimateSharedLayout, motion } from "framer-motion";
-import { groupBy, shuffle } from "lodash";
 import { useEffect, useState } from "react";
-import { Redirect, Route, Switch, useHistory } from "react-router-dom";
+import { Redirect, Route, Switch } from "react-router-dom";
 import { AnswerPage } from "./components/AnswerPage";
 import { Background } from "./components/Background";
 import { QuestionSelector } from "./components/QuestionSelector";
 import { Question } from "./Interfaces";
-import { chartSettings, getQuestions } from "./logic/api";
+import { getQuestions } from "./logic/api";
 import { roughTokenize } from "./logic/search";
 import { useWindowSize } from "./logic/use-window-size";
 
 export const App = () => {
   const [questions, setQuestions] = useState<Question[]>([]);
-
-  const history = useHistory();
 
   useEffect(() => {
     const getData = async () => {
@@ -29,37 +26,6 @@ export const App = () => {
   }, []);
 
   const windowSize = useWindowSize();
-
-  useEffect(() => {
-    const onKeyDown = (ev: KeyboardEvent) => {
-      if (ev.key === "r" && (ev.altKey || ev.ctrlKey)) {
-        ev.preventDefault();
-        ev.stopPropagation();
-
-        type Entry = typeof chartSettings[number];
-        type FilterCb = (e: Entry) => boolean;
-        const pickTypeThenChart = (cb: FilterCb): Entry | undefined => {
-          return shuffle(
-            shuffle([
-              ...Object.values(
-                groupBy(
-                  chartSettings.filter((s) => true),
-                  (e) => e.chart_type,
-                ),
-              ),
-            ])[0] || [],
-          )[0];
-        };
-
-        history.push("/ask/" + pickTypeThenChart((e) => true)?.id);
-      }
-    };
-
-    document.addEventListener("keydown", onKeyDown);
-    return () => {
-      document.removeEventListener("keydown", onKeyDown);
-    };
-  });
 
   if (!windowSize) {
     return null;

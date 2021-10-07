@@ -4,11 +4,9 @@ export interface Question {
   id: number;
   text: string;
   usefulWordCount: number;
+  frontend_settings: FrontendSettings;
 }
-
-export interface Answer {
-  id: number;
-  data: any;
+interface FrontendSettings {
   chart_type:
     | "value"
     | "bar"
@@ -23,4 +21,9 @@ export interface Answer {
   graph_label?: string;
   hide_x_axis?: boolean;
   domain_padding?: DomainPaddingPropType;
+  src_label: string;
+}
+export interface Answer extends FrontendSettings {
+  id: number;
+  data: any;
 }
