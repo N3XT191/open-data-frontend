@@ -15,6 +15,12 @@ The frontend is a very typical React app made with
 - Run `yarn` at the repository root (the folder with `yarn.lock`) to install dependencies from NPM
 - Run `yarn start` to start a local development server for the frontend
 
+Note that you will also need to start the backend for the app to work (see below).
+
 ### Code formatter
 
 All files must be formatted with [Prettier](https://prettier.io/), otherwise they will be rejected by CI. The easiest way to do that is on save using an editor plugin. You can also run `yarn format` to format all files.
+
+### Custom API URL
+
+The development build assumes that the backend is at `http://127.0.0.1:8000`. When building for production you will need to adjust that URL. This can be done using an environment variable: `env REACT_APP_API_URL=https://ask-open-data.ch/api yarn build`.
