@@ -60,6 +60,7 @@
     "@types/d3-geo": "^3.0.2",
     "@types/d3-scale": "^4.0.1",
     "@types/react-autosuggest": "^10.1.5",
-    "prettier": "^2.4.1"
+    "prettier": "^2.4.1",
+    "prettier-plugin-organize-imports": "^2.3.4"
   }
 }
