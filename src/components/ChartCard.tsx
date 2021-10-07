@@ -13,12 +13,14 @@ const styles = {
     box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.25);
   `,
   source: css`
-    font-size: 15px;
+    display: block;
     color: gray;
-    margin: 15px;
-    margin-left: 0;
-    margin-top: 0;
+    padding: 15px;
+    padding-top: 0;
     text-align: right;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 
     :hover {
       text-decoration: underline;
@@ -36,9 +38,9 @@ export const ChartCard = ({
     <div className={styles.outer} style={style}>
       {children}
       {sourceLabel && sourceUrl && (
-        <div className={styles.source}>
-          <a href={sourceUrl}>{sourceLabel}</a>
-        </div>
+        <a href={sourceUrl} className={styles.source}>
+          {sourceLabel}
+        </a>
       )}
     </div>
   );
