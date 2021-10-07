@@ -98,16 +98,13 @@ const _MapChart = ({
           </div>
         )}
       </ChartCard>
-      <ChartCard
-        sourceUrl={chart.src_url}
-        sourceLabel={chart.src_label}
-        style={{ padding: 30 }}
-      >
+      <ChartCard sourceUrl={chart.src_url} sourceLabel={chart.src_label}>
         <div
           style={{
             position: "relative",
             width,
             height,
+            margin: 30,
           }}
         >
           <svg
