@@ -27,3 +27,11 @@ A user can search for data visualizations with a Natural Language Input and view
 ## Developer documentation
 
 For step-by-step instructions to host your own version, see [./doc/developing.md](./doc/developing.md).
+
+## Data
+Currently, the following datasets are integrated:
+
+* Stündlich aktualisierte Luftqualitätsmessungen, seit 1983 ([Link](https://data.stadt-zuerich.ch/dataset/ugz_luftschadstoffmessung_stundenwerte))
+* Viertelstundenwerte zum Bruttolastgang elektrische Energie der Stadt Zürich ([Link](https://data.stadt-zuerich.ch/dataset/ewz_bruttolastgang_stadt_zuerich))
+* Gang dur Züri: Statistische Kennzahlen für Schulen ([Link](https://data.stadt-zuerich.ch/dataset/prd_ssz_gang-dur-zueri_od1005))
+* Hundebestand der Stadt Zürich ([Link](https://data.stadt-zuerich.ch/dataset/sid_stapo_hundebestand))
