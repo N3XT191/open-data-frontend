@@ -19,6 +19,10 @@ const styles = {
     margin-left: 0;
     margin-top: 0;
     text-align: right;
+
+    :hover {
+      text-decoration: underline;
+    }
   `,
 };
 
