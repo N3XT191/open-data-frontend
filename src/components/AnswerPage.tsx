@@ -74,10 +74,10 @@ export function getChartSize(
   windowSize: { width: number; height: number },
 ): { width: number; height: number } {
   let widthPadding = 200;
-  let heightPadding = 350;
+  let heightPadding = 380;
   if (windowSize.width <= 900) {
     widthPadding = 50;
-    heightPadding = 300;
+    heightPadding = 330;
   }
 
   const maxWidth = 800;
