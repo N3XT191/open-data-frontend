@@ -3,8 +3,8 @@ import { motion } from "framer-motion";
 import { useEffect, useMemo, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { Question } from "../Interfaces";
-import { useSearch } from "../search";
-import { colors, greys } fr../logic/searchctory-theme";
+import { useSearch } from "../logic/search";
+import { colors, greys } from "../victory-theme";
 import { QuestionText } from "./QuestionText";
 
 const styles = {
